@@ -17,6 +17,32 @@ NEST + GRAPHQL - INTRODUCCIÓN
         + Prettier (Formateo de código) [optinal]
             $ yarn remove prettier eslint-config-prettier eslint-plugin-prettier
 
+    - Nest CLI
+        + Crear un nuevo module
+            $ nest g mo helloWorld
+        + Crear un nuevo GraphQL resolver (no test files)
+            $ nest g r helloWorld --no-spec
+
+    - GraphQL Clients
+        + Browser (Funciona si el playgroud es habilitado)
+            > Open URL: http://localhost:3000/graphql
+                > Playground:
+                    La palabra 'query' es opcional
+                    query {
+                        # helloWorld
+                        hello: helloWorld
+                        # hello2: helloWorld
+                    }
+                    or
+                    {
+                        helloWorld
+                    }
+                    -> Run: CTRL + ENTER
+        + Altair GraphQL Client
+        + Insomnia
+        + Postman
+        + Apollo Studio (GraphQL) [Recomendado!!!]
+
 * VSCode
     - Shortcuts
         + Reload Window (CTRL + SHIFT + P > Search:... 'Developer: Reload Window')
