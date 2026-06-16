@@ -17,6 +17,12 @@ BREVE REFORZAMIENTO SOBRE NEST
         + Prettier (Formato de código) [optinal]
             $ yarn remove prettier eslint-config-prettier eslint-plugin-prettier
 
+    - NestJS CLI
+        + Crear un nuevo resource (sin arcchivos de test)
+            $ nest g res todo --no-spec
+                > ? What transport layer do you use? REST API
+                > ? Would you like to generate CRUD entry points? (Y/n) y
+
     - Postman
         + Create Workspace > Blank workspace | Click 'Next'
             > Name: Ax2CDev
@@ -25,8 +31,20 @@ BREVE REFORZAMIENTO SOBRE NEST
         + Create New Collection > Blank collection
             > Name: nestjs-graphql-foundation
         + HTTP Requests
-            * Hello World
-                > GET: http://localhost:3000                                Click 'Send'
+            * Create TODO
+                > GET: http://localhost:3000/todo                           Click 'Send'
+                    > Body > raw | JSON
+                        { }
+            * Get TODO
+                > GET: http://localhost:3000/todo                           Click 'Send'
+            * Get Single TODO
+                > GET: http://localhost:3000/todo/{{TODO_ID}}               Click 'Send'
+            * Update TODO
+                > UPDATE: http://localhost:3000/todo/{{TODO_ID}}            Click 'Send'
+                    > Body > raw | JSON
+                        { }
+            * Delete TODO
+                > DELETE: http://localhost:3000/todo/{{TODO_ID}}            Click 'Send'
 
 * VSCode
     - Shortcuts
