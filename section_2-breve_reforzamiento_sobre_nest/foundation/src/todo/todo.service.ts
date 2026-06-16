@@ -50,6 +50,8 @@ export class TodoService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} todo`;
+    this.findOne(id);
+
+    this.todos = this.todos.filter((dbTodo) => dbTodo.id !== id);
   }
 }
