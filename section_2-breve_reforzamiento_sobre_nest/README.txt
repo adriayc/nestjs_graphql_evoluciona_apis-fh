@@ -48,7 +48,10 @@ BREVE REFORZAMIENTO SOBRE NEST
             * Update TODO
                 > UPDATE: http://localhost:3000/todo/{{TODO_ID}}            Click 'Send'
                     > Body > raw | JSON
-                        { }
+                        {
+                            "description": "Piedra del Mente Updated",
+                            "done": true
+                        }
             * Delete TODO
                 > DELETE: http://localhost:3000/todo/{{TODO_ID}}            Click 'Send'
 
