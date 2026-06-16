@@ -13,6 +13,10 @@ BREVE REFORZAMIENTO SOBRE NEST
         $ yarn run start        // Run app
         $ yarn run start:dev    // Run app (watch mode)
 
+    - Instalar dependencias
+        + Validation (Validate data)
+            $ yarn add class-validator class-transformer
+
     - Eliminar dependencias
         + Prettier (Formato de código) [optinal]
             $ yarn remove prettier eslint-config-prettier eslint-plugin-prettier
@@ -34,7 +38,9 @@ BREVE REFORZAMIENTO SOBRE NEST
             * Create TODO
                 > GET: http://localhost:3000/todo                           Click 'Send'
                     > Body > raw | JSON
-                        { }
+                        {
+                            "description": "Piedra del Mente"
+                        }
             * Get TODO
                 > GET: http://localhost:3000/todo                           Click 'Send'
             * Get Single TODO
