@@ -9,6 +9,10 @@ NEST + GRAPHQL - INTRODUCCIÓN
         $ yarn run start        // Run app
         $ yarn run start:dev    // Run app (watch mode)
 
+    - Agregar dependecias
+        - GraphQL (For Express and Apollo) [default]
+            $ yarn add @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
+
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
             $ yarn remove prettier eslint-config-prettier eslint-plugin-prettier
