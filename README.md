@@ -54,3 +54,24 @@ Instalaciones adicionales
 - [TypeScript importer](https://marketplace.visualstudio.com/items?itemName=pmneo.tsimporter)
 - [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
 - [Better Dockerfile Syntax](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax)
+
+## GraphQL
+
+GraphQL es un lenguaje de consulta (query language) y un entorno de ejecución (runtime) para APIs que permite a los clientes solicitar exactamente los datos que necesitan ni más ni menos. Fue desarrollado por Meta Platforms (antes Facebook) y liverado como proyecto de código abierto en 2015.
+
+## NestJS
+
+NestJS es un framework para aplicaciones del lado del servidor (back-end) construido sobre Node.js y escrito principalmente en TypeScript. Su objetivo es facilitar la creación de aplicaciones escalables, mantenibles y bien estructurados.
+
+Los enfoques para definir el squema GraphQL en una aplicación de NestJS son:
+
+- **Code First**
+- **Schema First**
+
+### Code First
+
+En Code First, el esquema GraphQL se genera automáticamente a partir de clases y decoradores de TypeScript.
+
+### Schema First
+
+En Schema First, primero se define el esquema GraphQL manulamente en archivos `.graphql` o `.gql`, y después se implementa el código que lo respalda.
