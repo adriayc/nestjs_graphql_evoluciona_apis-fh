@@ -27,6 +27,8 @@ NEST + GRAPHQL - INTRODUCCIÓN
             $ nest g mo todo
         + Crear un nuevo GraphQL resolver (no test files)
             $ nest g r todo --no-spec
+        + Crear un nuevo service (no test files)
+            $ nest g s todo --no-spec
 
     - GraphQL Clients
         + Browser (Funciona si el playgroud es habilitado)
@@ -73,6 +75,14 @@ NEST + GRAPHQL - INTRODUCCIÓN
                         - todos
                             query Todos {
                                 todos {
+                                    id
+                                    description
+                                    done
+                                }
+                            }
+                            Or
+                            query Todos {
+                                tareas: todos { // Renombrar a 'tareas'
                                     id
                                     description
                                     done
