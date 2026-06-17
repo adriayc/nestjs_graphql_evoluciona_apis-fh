@@ -57,7 +57,11 @@ NEST + GRAPHQL - INTRODUCCIÓN
                             rdn2: randomNumber
                         }
                         Click 'Query'
-
+                    * randomFromZeroTo
+                        query Query {
+                            randomFromZeroTo
+                        }
+                        Click 'Query'
 
 * VSCode
     - Shortcuts

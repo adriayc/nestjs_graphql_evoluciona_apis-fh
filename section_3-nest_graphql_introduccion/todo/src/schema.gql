@@ -6,4 +6,7 @@ type Query {
   """Retorna un Hola Mundo GraphQL!"""
   hello: String!
   randomNumber: Float!
+
+  """Retornar un número random entre 0 y 10 (Sin incluir el 10)"""
+  randomFromZeroTo: Int!
 }
