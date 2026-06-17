@@ -1,4 +1,4 @@
-import { Float, Int, Query, Resolver } from '@nestjs/graphql';
+import { Args, Float, Int, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 export class HelloWorldResolver {
@@ -17,9 +17,11 @@ export class HelloWorldResolver {
 
   @Query(() => Int, {
     name: 'randomFromZeroTo',
-    description: 'Retornar un número random entre 0 y 10 (Sin incluir el 10)',
+    description: 'Return random number from zero to argument TO (default 6)',
   })
-  getRandomFromZeroTo(): number {
-    return Math.floor(Math.random() * 10); // Genera un entre 0 y 10, y redondeo hacia abajo
+  getRandomFromZeroTo(
+    @Args('to', { type: () => Int, nullable: true }) to: number = 6, // Argumento 'to' (para graphql), por defecto es 6 y opcional (nullable: true)
+  ): number {
+    return Math.floor(Math.random() * to); // Genera un número entre 0 y valor de TO (no incluye el valor TO)
   }
 }

@@ -59,7 +59,8 @@ NEST + GRAPHQL - INTRODUCCIÓN
                         Click 'Query'
                     * randomFromZeroTo
                         query Query {
-                            randomFromZeroTo
+                            randomFromZeroTo            // Default 6, genera un número entre 0 y 6 (sin incluir el 6)
+                            rdn5: randomFromZeroTo(5)   // Genera un número entre 0 y 5 (sin incluir el 5)
                         }
                         Click 'Query'
 
