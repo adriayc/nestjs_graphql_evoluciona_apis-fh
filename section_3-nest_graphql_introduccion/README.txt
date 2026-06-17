@@ -42,6 +42,13 @@ NEST + GRAPHQL - INTRODUCCIÓN
         + Insomnia
         + Postman
         + Apollo Studio (GraphQL) [Recomendado!!!]
+            > SANDBOX: http://localhost:3000/graphql
+                > Operation
+                    query Query {
+                        --typename      // Indica el nombre del tipo de dato
+                        helloWorld      // Indica el nombre del campo
+                    }
+
 
 * VSCode
     - Shortcuts
