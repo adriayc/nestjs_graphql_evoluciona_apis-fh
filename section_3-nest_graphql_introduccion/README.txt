@@ -23,6 +23,11 @@ NEST + GRAPHQL - INTRODUCCIÓN
         + Crear un nuevo GraphQL resolver (no test files)
             $ nest g r helloWorld --no-spec
 
+        + Crear un nuevo module
+            $ nest g mo todo
+        + Crear un nuevo GraphQL resolver (no test files)
+            $ nest g r todo --no-spec
+
     - GraphQL Clients
         + Browser (Funciona si el playgroud es habilitado)
             > Open URL: http://localhost:3000/graphql
@@ -44,25 +49,36 @@ NEST + GRAPHQL - INTRODUCCIÓN
         + Apollo Studio (GraphQL) [Recomendado!!!]
             > SANDBOX: http://localhost:3000/graphql
                 > Operation
-                    * helloWord
-                        query Query {
-                            --typename      // Indica el nombre del tipo de dato
-                            helloWorld      // Indica el nombre del campo
-                        }
-                        Click 'Query'
-                    * randomNumber (Podemos elimnar 'query Query' o modificar el nombre 'query ObtieneNuemerosRandom')
-                        query Query {
-                            randomNumber
-                            rdn1: randomNumber
-                            rdn2: randomNumber
-                        }
-                        Click 'Query'
-                    * randomFromZeroTo
-                        query Query {
-                            randomFromZeroTo            // Default 6, genera un número entre 0 y 6 (sin incluir el 6)
-                            rdn5: randomFromZeroTo(5)   // Genera un número entre 0 y 5 (sin incluir el 5)
-                        }
-                        Click 'Query'
+                    * TEST
+                        - helloWord
+                            query Query {
+                                --typename      // Indica el nombre del tipo de dato
+                                helloWorld      // Indica el nombre del campo
+                            }
+                            Click 'Query'
+                        - randomNumber (Podemos elimnar 'query Query' o modificar el nombre 'query ObtieneNuemerosRandom')
+                            query Query {
+                                randomNumber
+                                rdn1: randomNumber
+                                rdn2: randomNumber
+                            }
+                            Click 'Query'
+                        - randomFromZeroTo
+                            query Query {
+                                randomFromZeroTo            // Default 6, genera un número entre 0 y 6 (sin incluir el 6)
+                                rdn5: randomFromZeroTo(5)   // Genera un número entre 0 y 5 (sin incluir el 5)
+                            }
+                            Click 'Query'
+                    * TODO
+                        - todos
+                            query Todos {
+                                todos {
+                                    id
+                                    description
+                                    done
+                                }
+                            }
+                            Click 'Query'
 
 * VSCode
     - Shortcuts
