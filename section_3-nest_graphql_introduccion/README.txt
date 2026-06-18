@@ -12,6 +12,8 @@ NEST + GRAPHQL - INTRODUCCIÓN
     - Agregar dependecias
         - GraphQL (For Express and Apollo) [default]
             $ yarn add @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
+        - Validator (Validación de la data)
+            $ yarn add class-validator class-transformer
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
@@ -144,7 +146,17 @@ NEST + GRAPHQL - INTRODUCCIÓN
                             Variables
                             {
                                 "createTodoInput": {
-                                    "description": "Hola mundo"
+                                    "description": "Piedra del Tiempo"
+                                }
+                            }
+                            Or
+                            mutation {
+                                createTodo(createTodoInput: {
+                                    description: "Piedra del Tiempo"
+                                }) {
+                                    id
+                                    description
+                                    done
                                 }
                             }
                             Click 'Query'
