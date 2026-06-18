@@ -133,6 +133,21 @@ NEST + GRAPHQL - INTRODUCCIÓN
                                 done
                             }
                             Click 'Query'
+                        - createTodo
+                            mutation Mutation($createTodoInput: CreateTodoInput!) {
+                                createTodo(createTodoInput: $createTodoInput) {
+                                    id
+                                    description
+                                    done
+                                }
+                            }
+                            Variables
+                            {
+                                "createTodoInput": {
+                                    "description": "Hola mundo"
+                                }
+                            }
+                            Click 'Query'
 
 * VSCode
     - Shortcuts
