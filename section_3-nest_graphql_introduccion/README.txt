@@ -177,6 +177,15 @@ NEST + GRAPHQL - INTRODUCCIÓN
                                 }
                             }
                             Click 'Query'
+                        - deleteTodo
+                            mutation Mutation($deleteTodoId: Int!) {
+                                deleteTodo(id: $deleteTodoId)
+                            }
+                            Variables
+                            {
+                                "deleteTodoId": 1
+                            }
+                            Click 'Query'
 
 * VSCode
     - Shortcuts

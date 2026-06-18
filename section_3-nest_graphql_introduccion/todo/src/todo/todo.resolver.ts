@@ -4,7 +4,7 @@ import { TodoService } from './todo.service';
 import { Todo } from './entity/todo.entity';
 import { CreateTodoInput, UpdateTodoInput } from './dto/inputs';
 
-@Resolver()
+@Resolver(() => Todo) // El resolver trabajara con Todo
 export class TodoResolver {
   constructor(private readonly todoServices: TodoService) {}
 
@@ -25,8 +25,11 @@ export class TodoResolver {
 
   @Mutation(() => Todo, { name: 'updateTodo' })
   update(@Args('updateTodoInput') updateTodoInput: UpdateTodoInput): Todo {
-    return this.todoServices.update(updateTodoInput);
+    return this.todoServices.update(updateTodoInput.id, updateTodoInput);
   }
 
-  delete() {}
+  @Mutation(() => Boolean, { name: 'deleteTodo' })
+  delete(@Args('id', { type: () => Int }) id: number): boolean {
+    return this.todoServices.delete(id);
+  }
 }
