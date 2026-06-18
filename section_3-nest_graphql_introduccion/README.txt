@@ -89,6 +89,32 @@ NEST + GRAPHQL - INTRODUCCIÓN
                                 }
                             }
                             Click 'Query'
+                        - todo
+                            query Todo($todoId: Int!) {
+                                todo(id: $todoId) {
+                                    # done
+                                    description
+                                    id
+                                }
+                            }
+                            Variables
+                            {
+                                "todoId": 2
+                            }
+                            Or
+                            {
+                                todo1: todo(id: 1) {
+                                    # done
+                                    description
+                                    id
+                                }
+                                todo2: todo(id: 2) {
+                                    # done
+                                    description
+                                    id
+                                }
+                            }
+                            Click 'Query'
 
 * VSCode
     - Shortcuts
