@@ -114,6 +114,24 @@ NEST + GRAPHQL - INTRODUCCIÓN
                                     id
                                 }
                             }
+                            With 'Fragments'
+                            {
+                                todo1: todo(id: 1) {
+                                    ...fields
+                                }
+                                todo2: todo(id: 2) {
+                                    ...fields
+                                }
+                                todo3: todo(id: 3) {
+                                    ...fields
+                                }
+                            }
+                            # Fragments
+                            fragment fields on Todo {
+                                id
+                                description
+                                done
+                            }
                             Click 'Query'
 
 * VSCode
