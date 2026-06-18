@@ -160,6 +160,23 @@ NEST + GRAPHQL - INTRODUCCIÓN
                                 }
                             }
                             Click 'Query'
+                        - updateTodo
+                            mutation UpdateTodo($updateTodoInput: UpdateTodoInput!) {
+                                updateTodo(updateTodoInput: $updateTodoInput) {
+                                    id
+                                    description
+                                    done
+                                }
+                            }
+                            Variables
+                            {
+                                "updateTodoInput": {
+                                    "id": 1,
+                                    "description": "Piedra del Alma Updated",
+                                    "done": true
+                                }
+                            }
+                            Click 'Query'
 
 * VSCode
     - Shortcuts
