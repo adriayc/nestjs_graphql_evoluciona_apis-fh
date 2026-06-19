@@ -207,6 +207,23 @@ NEST + GRAPHQL - INTRODUCCIÓN
                             }
                             Click 'Query'
 
+                        - totalTodos, completedTodos, pendingTodos and todos
+                            query Todos {
+                                totalTodos
+                                completedTodos
+                                pendingTodos
+                                todos {
+                                    ...fields
+                                }
+                            }
+                            # Fragments
+                            fragment fields on Todo {
+                                id
+                                description
+                                done
+                            }
+                            Click 'Query'
+
 * VSCode
     - Shortcuts
         + Reload Window (CTRL + SHIFT + P > Search:... 'Developer: Reload Window')
