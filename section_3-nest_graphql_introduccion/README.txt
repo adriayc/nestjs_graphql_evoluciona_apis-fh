@@ -223,6 +223,16 @@ NEST + GRAPHQL - INTRODUCCIÓN
                                 done
                             }
                             Click 'Query'
+                        - aggregation
+                            query Aggregations {
+                                aggregations {
+                                    total
+                                    completed
+                                    pending
+                                    # totalTodosCompleted # Obsoleto!!!
+                                }
+                            }
+                            Click 'Query'
 
 * VSCode
     - Shortcuts

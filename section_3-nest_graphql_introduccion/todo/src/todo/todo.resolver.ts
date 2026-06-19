@@ -3,6 +3,7 @@ import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { TodoService } from './todo.service';
 import { Todo } from './entity/todo.entity';
 import { CreateTodoInput, UpdateTodoInput, StatusArgs } from './dto';
+import { AggregationsType } from './types/aggregations.type';
 
 @Resolver(() => Todo) // El resolver trabajara con Todo
 export class TodoResolver {
@@ -47,5 +48,14 @@ export class TodoResolver {
   @Query(() => Int, { name: 'pendingTodos' })
   pendingTodos(): number {
     return this.todoServices.pendingTodos; // Call get method
+  }
+
+  @Query(() => AggregationsType)
+  aggregations(): AggregationsType {
+    return {
+      total: this.todoServices.totalTodos,
+      completed: this.todoServices.completedTodos,
+      pending: this.todoServices.pendingTodos,
+    };
   }
 }
