@@ -91,6 +91,26 @@ NEST + GRAPHQL - INTRODUCCIÓN
                                 }
                             }
                             Click 'Query'
+
+                            Filters
+                            {
+                                todos {
+                                    ...fields
+                                }
+                                completed: todos(status: true) {
+                                    ...fields
+                                }
+                                    pending: todos(status: false) {
+                                    ...fields
+                                }
+                                }
+                                # Fragments
+                                fragment fields on Todo {
+                                id
+                                description
+                                done
+                            }
+                            Click 'Query'
                         - todo
                             query Todo($todoId: Int!) {
                                 todo(id: $todoId) {

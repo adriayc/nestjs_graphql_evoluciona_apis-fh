@@ -15,7 +15,10 @@ type Query {
 
   """Return random number from zero to argument TO (default 6)"""
   randomFromZeroTo(to: Int): Int!
-  todos: [Todo!]!
+  todos(
+    """Status of TODO"""
+    status: Boolean
+  ): [Todo!]!
   todo(id: Int!): Todo!
 }
 
