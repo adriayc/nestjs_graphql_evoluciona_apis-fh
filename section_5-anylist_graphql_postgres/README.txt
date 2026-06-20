@@ -10,9 +10,22 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
         $ yarn run start            // Run app (dev mode)
         $ yarn run start:dev        // Run app (dev and watch mode)
 
+    - Instalar dependencias
+        + GraphQL
+            $ yarn add @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
+
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
             $ yarn remove prettier eslint-config-prettier eslint-plugin-prettier
+
+    - Nest CLI
+        + Crear un nuevo resource (no test file)
+            $ nest g res items --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) y
+
+    - Apollo Sandbox (Studio)
+        + Request in GraphQL (Browser URL: http://localhost:3000/graphql)
 
 * VSCode
     - Shortcuts
