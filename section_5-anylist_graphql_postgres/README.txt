@@ -16,6 +16,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
     - Instalar dependencias
         + GraphQL
             $ yarn add @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
+        + Configuration (Environments)
+            $ yarn add @nestjs/config
+        + TypeORM (Postgres)
+            $ yarn add @nestjs/typeorm typeorm pg
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
@@ -29,6 +33,17 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL: http://localhost:3000/graphql)
+
+    - Table Plus
+        + Create new connection (Click '+' | 'New Connection')
+            > Connection's name: Anylist
+            > PostgreSQL
+            > Database host/socket: localhost
+            > Port: 5432
+            > Database's user: postgres
+            > Password: {{POSTGRES_PASSWORD}}
+            > Database's name: {POSTGRES_DB}}
+            Click 'Test' | 'Save' | 'Connect'
 
 * VSCode
     - Shortcuts
