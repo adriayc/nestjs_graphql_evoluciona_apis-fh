@@ -1,5 +1,14 @@
 # ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
 
+## Setup
+
+1. Clonar el repositorio.
+2. Crear el archivo `.env` de las variables de entorno a partir de `.env.example`.
+3. Levantar la database (docker) `docker compose up -d`.
+4. Descargar y configurar todas las dependencias `yarn install` o `yarn`
+5. Ejecutar o levantar la app `yarn run start:dev` o `yarn start:dev`.
+6. Abrir en el navegador la URL (Apollo sandbox): http://localhost:3000/graphql
+
 ## NestJS
 
 NestJS es un framework de código abierto para desarrollar aplicaciones del lado del servidor (backend) con Noje.js. Está escrito principalmente en TypeScript y está inspirado en la arquitectura de Angular, utilizando conceptos como módulos, inyección de dependencia, decoradores y servicios.
