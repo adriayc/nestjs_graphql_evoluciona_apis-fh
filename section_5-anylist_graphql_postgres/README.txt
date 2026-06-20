@@ -10,6 +10,9 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
         $ yarn run start            // Run app (dev mode)
         $ yarn run start:dev        // Run app (dev and watch mode)
 
+    - Ejecutar la DB
+        $ docker compose up [-d]        // Crear la imagen y ejecutar el servicio (-d detached mode)
+
     - Instalar dependencias
         + GraphQL
             $ yarn add @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
