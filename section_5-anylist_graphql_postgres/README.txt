@@ -35,6 +35,33 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
+            * createItem (Mutation)
+                > Operation
+                    mutation CreateItem($createItemInput: CreateItemInput!) {
+                        createItem(createItemInput: $createItemInput) {
+                            id
+                            name
+                            quantity
+                            quantityUnits
+                        }
+                    }
+                > Variables
+                    {
+                        "createItemInput": {
+                            "name": "Pañales",
+                            "quantity": 1
+                        }
+                    }
+
+                    {
+                        "createItemInput": {
+                            "name": "Uvas",
+                            "quantity": 2,
+                            "quentityUnits": "lb"
+                        }
+                    }
+                Click 'CreateItem'
+
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
