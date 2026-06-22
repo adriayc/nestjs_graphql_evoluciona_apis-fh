@@ -20,6 +20,8 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ yarn add @nestjs/config
         + TypeORM (Postgres)
             $ yarn add @nestjs/typeorm typeorm pg
+        + Validator (Validación de la data)
+            $ yarn add class-validator class-transformer
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
@@ -32,7 +34,7 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                 > ? Would you like to generate CRUD entry points? (Y/n) y
 
     - Apollo Sandbox (Studio)
-        + Request in GraphQL (Browser URL: http://localhost:3000/graphql)
+        + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
@@ -44,6 +46,7 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             > Password: {{POSTGRES_PASSWORD}}
             > Database's name: {POSTGRES_DB}}
             Click 'Test' | 'Save' | 'Connect'
+
 
 * VSCode
     - Shortcuts
