@@ -1,8 +1,12 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
 
+import { SignupInput } from './dto/inputs/signup.input';
+import { AuthResponse } from './types/auth-response.type';
+
 @Injectable()
 export class AuthService {
-  signup() {
+  signup(signupInput: SignupInput): Promise<AuthResponse> {
+    console.log(signupInput);
     throw new NotImplementedException('signup method not implemented');
   }
 

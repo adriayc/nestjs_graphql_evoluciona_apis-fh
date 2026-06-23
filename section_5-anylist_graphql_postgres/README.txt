@@ -43,92 +43,115 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
-            * createItem (Mutation)
-                > Operation
-                    mutation CreateItem($createItemInput: CreateItemInput!) {
-                        createItem(createItemInput: $createItemInput) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+            * Item
+                - createItem (Mutation)
+                    > Operation
+                        mutation CreateItem($createItemInput: CreateItemInput!) {
+                            createItem(createItemInput: $createItemInput) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                > Variables
-                    {
-                        "createItemInput": {
-                            "name": "Pañales",
-                            "quantity": 1
+                    > Variables
+                        {
+                            "createItemInput": {
+                                "name": "Pañales",
+                                "quantity": 1
+                            }
                         }
-                    }
 
-                    {
-                        "createItemInput": {
-                            "name": "Uvas",
-                            "quantity": 2,
-                            "quentityUnits": "lb"
+                        {
+                            "createItemInput": {
+                                "name": "Uvas",
+                                "quantity": 2,
+                                "quentityUnits": "lb"
+                            }
                         }
-                    }
-                Click 'CreateItem'
-            * items (Query)
-                > Operation
-                    query Items {
-                        items {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    Click 'CreateItem'
+                - items (Query)
+                    > Operation
+                        query Items {
+                            items {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                Click 'Items'
-            * item (Query)
-                 > Operation
-                    query Item($itemId: ID!) {
-                        item(id: $itemId) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    Click 'Items'
+                - item (Query)
+                    > Operation
+                        query Item($itemId: ID!) {
+                            item(id: $itemId) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                > Variables
-                    {
-                        "itemId": "{{ITEM_ID}}"
-                    }
-                Click 'Item'
-            * updateItem (Mutation)
-                > Operation
-                    mutation UpdateItem($updateItemInput: UpdateItemInput!) {
-                        updateItem(updateItemInput: $updateItemInput) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    > Variables
+                        {
+                            "itemId": "{{ITEM_ID}}"
                         }
-                    }
-                > Variables
-                    {
-                        "updateItemInput": {
-                            "id": "f76a3ac5-a67c-4639-adb9-8c6363837533",
-                            "name": "Pañales Updated",
-                            // "quantity": 2
+                    Click 'Item'
+                - updateItem (Mutation)
+                    > Operation
+                        mutation UpdateItem($updateItemInput: UpdateItemInput!) {
+                            updateItem(updateItemInput: $updateItemInput) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                Click 'UpdateItem'
-            * removeItem (Mutation)
-                > Operation
-                    mutation RemoveItem($removeItemId: ID!) {
-                        removeItem(id: $removeItemId) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    > Variables
+                        {
+                            "updateItemInput": {
+                                "id": "f76a3ac5-a67c-4639-adb9-8c6363837533",
+                                "name": "Pañales Updated",
+                                // "quantity": 2
+                            }
                         }
-                    }
-                > Variables
-                    {
-                        "removeItemId": "{{ITEM_ID}}"
-                    }
-                Click 'RemoveItem'
+                    Click 'UpdateItem'
+                - removeItem (Mutation)
+                    > Operation
+                        mutation RemoveItem($removeItemId: ID!) {
+                            removeItem(id: $removeItemId) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
+                        }
+                    > Variables
+                        {
+                            "removeItemId": "{{ITEM_ID}}"
+                        }
+                    Click 'RemoveItem'
+            * Auth
+                - signup (Mutation)
+                    > Operation
+                        mutation Signup($signupInput: SignupInput!) {
+                            signup(signupInput: $signupInput) {
+                                token,
+                                user {
+                                    id
+                                    fullName
+                                    email,
+                                }
+                            }
+                        }
+                    > Variables
+                        {
+                            "signupInput": {
+                                "fullName": "Adriano Ayala",
+                                "email": "adriano@mail.com",
+                                "password": "Secret123#"
+                            }
+                        }
+                    Click 'Signup'
 
 
     - Table Plus
