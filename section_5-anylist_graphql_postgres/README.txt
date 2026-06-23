@@ -61,7 +61,17 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         }
                     }
                 Click 'CreateItem'
-
+            * items (Query)
+                > Operation
+                    query Items {
+                        items {
+                            id
+                            name
+                            quantity
+                            quantityUnits
+                        }
+                    }
+                Click 'Items'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
