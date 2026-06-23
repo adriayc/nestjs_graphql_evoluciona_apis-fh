@@ -137,9 +137,11 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             signup(signupInput: $signupInput) {
                                 token,
                                 user {
-                                    id
-                                    fullName
-                                    email,
+                                id
+                                email,
+                                fullName,
+                                isActive,
+                                roles
                                 }
                             }
                         }

@@ -11,5 +11,10 @@ import { User } from './entities/user.entity';
     // TypeORM config
     TypeOrmModule.forFeature([User]),
   ],
+  exports: [
+    // TypeOrmModule,
+    // User service
+    UsersService,
+  ],
 })
 export class UsersModule {}
