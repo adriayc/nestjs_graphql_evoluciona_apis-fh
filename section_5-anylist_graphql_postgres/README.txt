@@ -72,6 +72,21 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         }
                     }
                 Click 'Items'
+            * item (Query)
+                 > Operation
+                    query Item($itemId: ID!) {
+                        item(id: $itemId) {
+                            id
+                            name
+                            quantity
+                            quantityUnits
+                        }
+                    }
+                > Variables
+                    {
+                        "itemId": "{{ITEM_ID}}"
+                    }
+                Click 'Item'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
