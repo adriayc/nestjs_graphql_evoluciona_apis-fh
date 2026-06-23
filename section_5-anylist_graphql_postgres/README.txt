@@ -32,6 +32,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ nest g res items --no-spec
                 > ? What transport layer do you use? GraphQL (code first)
                 > ? Would you like to generate CRUD entry points? (Y/n) y
+        * Crear un nuevo resource (no test file)
+            $ nest g res users --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) y
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
