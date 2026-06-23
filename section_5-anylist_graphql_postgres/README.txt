@@ -106,6 +106,22 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         }
                     }
                 Click 'UpdateItem'
+            * removeItem (Mutation)
+                > Operation
+                    mutation RemoveItem($removeItemId: ID!) {
+                        removeItem(id: $removeItemId) {
+                            id
+                            name
+                            quantity
+                            quantityUnits
+                        }
+                    }
+                > Variables
+                    {
+                        "removeItemId": "{{ITEM_ID}}"
+                    }
+                Click 'RemoveItem'
+
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
