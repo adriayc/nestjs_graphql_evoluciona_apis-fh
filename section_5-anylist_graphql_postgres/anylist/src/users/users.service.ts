@@ -1,6 +1,8 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
+  Logger,
   NotImplementedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,6 +13,8 @@ import { SignupInput } from 'src/auth/dto/inputs/signup.input';
 
 @Injectable()
 export class UsersService {
+  private logger = new Logger('UsersService');
+
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
@@ -22,8 +26,7 @@ export class UsersService {
 
       return await this.usersRepository.save(newUser);
     } catch (error) {
-      console.log(error);
-      throw new BadRequestException('Something went wrong');
+      this.handlerDBError(error);
     }
   }
 
@@ -37,5 +40,14 @@ export class UsersService {
 
   block(id: string): Promise<User> {
     throw new NotImplementedException('block method not implemented');
+  }
+
+  private handlerDBError(error: any): never {
+    if (error.code === '23505') {
+      throw new BadRequestException(error.detail.replace('Key ', ''));
+    }
+
+    this.logger.error(error);
+    throw new InternalServerErrorException('Please check server logs');
   }
 }
