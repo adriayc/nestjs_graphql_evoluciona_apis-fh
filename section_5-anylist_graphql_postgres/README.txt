@@ -87,6 +87,25 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         "itemId": "{{ITEM_ID}}"
                     }
                 Click 'Item'
+            * updateItem (Mutation)
+                > Operation
+                    mutation UpdateItem($updateItemInput: UpdateItemInput!) {
+                        updateItem(updateItemInput: $updateItemInput) {
+                            id
+                            name
+                            quantity
+                            quantityUnits
+                        }
+                    }
+                > Variables
+                    {
+                        "updateItemInput": {
+                            "id": "f76a3ac5-a67c-4639-adb9-8c6363837533",
+                            "name": "Pañales Updated",
+                            // "quantity": 2
+                        }
+                    }
+                Click 'UpdateItem'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
