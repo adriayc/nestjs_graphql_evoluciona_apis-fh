@@ -22,6 +22,8 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ yarn add @nestjs/typeorm typeorm pg
         + Validator (Validación de la data)
             $ yarn add class-validator class-transformer
+        + Bcrypt (Hash password)
+            $ yarn add bcrypt
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
