@@ -43,7 +43,11 @@ export class UsersService {
     try {
       return await this.usersRepository.findOneByOrFail({ email });
     } catch (error) {
-      this.handlerDBError(error);
+      // this.handlerDBError({
+      //   code: '404',
+      //   detail: `User with emai ${email} not found`,
+      // });
+      throw new NotFoundException(`User with email ${email} not found`);
     }
   }
 
@@ -55,6 +59,9 @@ export class UsersService {
     if (error.code === '23505') {
       throw new BadRequestException(error.detail.replace('Key ', ''));
     }
+    // if (error.code === 404) {
+    //   throw new NotFoundException(error.detail);
+    // }
 
     this.logger.error(error);
     throw new InternalServerErrorException('Please check server logs');
