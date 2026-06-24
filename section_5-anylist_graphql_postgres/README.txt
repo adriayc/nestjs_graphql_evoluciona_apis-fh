@@ -156,7 +156,27 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             }
                         }
                     Click 'Signup'
-
+                - login (Mutation)
+                    > Operation
+                        mutation Login($loginInput: LoginInput!) {
+                            login(loginInput: $loginInput) {
+                                token,
+                                user {
+                                id,
+                                fullName,
+                                email,
+                                isActive,
+                                roles
+                                }
+                            }
+                        }
+                    > Variables
+                        {
+                            "loginInput": {
+                                "email": "adriano@mail.com",
+                                "password": "Secret123#"
+                            }
+                        }
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')

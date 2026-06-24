@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
   NotImplementedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -38,8 +39,12 @@ export class UsersService {
     throw new NotImplementedException('findAll method not implemented');
   }
 
-  findOne(id: string): Promise<User> {
-    throw new NotImplementedException('findOne method not implemented');
+  async findOneByEmail(email: string): Promise<User> {
+    try {
+      return await this.usersRepository.findOneByOrFail({ email });
+    } catch (error) {
+      this.handlerDBError(error);
+    }
   }
 
   block(id: string): Promise<User> {

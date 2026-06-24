@@ -1,6 +1,6 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
 
-import { SignupInput } from './dto/inputs/signup.input';
+import { SignupInput, LoginInput } from './dto/inputs';
 import { AuthResponse } from './types/auth-response.type';
 import { UsersService } from 'src/users/users.service';
 
@@ -17,8 +17,17 @@ export class AuthService {
     return { user, token };
   }
 
-  login() {
-    throw new NotImplementedException('login method not implemented');
+  async login(loginInput: LoginInput): Promise<AuthResponse> {
+    const { email, password } = loginInput;
+
+    const user = await this.userService.findOneByEmail(email);
+
+    const token = 'ABC123';
+
+    return {
+      user,
+      token,
+    };
   }
 
   revalidateToken() {
