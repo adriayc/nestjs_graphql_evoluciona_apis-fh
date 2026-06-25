@@ -6,9 +6,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { UsersModule } from 'src/users/users.module';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
-  providers: [AuthResolver, AuthService],
+  providers: [AuthResolver, AuthService, JwtStrategy],
   imports: [
     // Config setup
     ConfigModule,
@@ -30,5 +31,6 @@ import { UsersModule } from 'src/users/users.module';
     // User module
     UsersModule,
   ],
+  exports: [JwtStrategy],
 })
 export class AuthModule {}
