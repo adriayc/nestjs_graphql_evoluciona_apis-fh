@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { SignupInput, LoginInput } from './dto/inputs';
 import { AuthResponse } from './types/auth-response.type';
 import { UsersService } from 'src/users/users.service';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -49,5 +50,16 @@ export class AuthService {
 
   revalidateToken() {
     throw new NotImplementedException('revalidateToken method not implemented');
+  }
+
+  async validateUser(id: string): Promise<User> {
+    const user = await this.userService.findOneById(id);
+    if (!user.isActive)
+      throw new UnauthorizedException('User is inactive, talk with and admin');
+
+    // delete user.password; // Error!
+    delete (user as any).password;
+
+    return user;
   }
 }
