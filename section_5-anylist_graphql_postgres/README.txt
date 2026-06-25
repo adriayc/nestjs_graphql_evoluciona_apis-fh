@@ -186,8 +186,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             revalidate {
                                 token
                                 user {
-                                id,
-                                fullName
+                                    id,
+                                    fullName
+                                    isActive
+                                    roles
                                 }
                             }
                         }

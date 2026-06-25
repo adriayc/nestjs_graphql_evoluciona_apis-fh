@@ -29,8 +29,6 @@ export class AuthResolver {
   @Query(() => AuthResponse, { name: 'revalidate' })
   @UseGuards(JwtAuthGuard) // Call custom JwtAuthGuard
   revalidateToken(@CurrentUser() user: User): AuthResponse {
-    console.log({ user });
-    // return await this.authService.revalidateToken();
-    throw new NotImplementedException('No implemented');
+    return this.authService.revalidateToken(user);
   }
 }

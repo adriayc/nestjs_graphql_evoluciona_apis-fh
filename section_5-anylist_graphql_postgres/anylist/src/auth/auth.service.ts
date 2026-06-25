@@ -48,8 +48,10 @@ export class AuthService {
     };
   }
 
-  revalidateToken() {
-    throw new NotImplementedException('revalidateToken method not implemented');
+  revalidateToken(user: User): AuthResponse {
+    const token = this.getJwtToken(user.id);
+
+    return { user, token };
   }
 
   async validateUser(id: string): Promise<User> {
