@@ -180,6 +180,23 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 "password": "Secret123#"
                             }
                         }
+                - revalidate
+                    > Operation
+                        query Revalidate {
+                            revalidate {
+                                token
+                                user {
+                                id,
+                                fullName
+                                }
+                            }
+                        }
+                    > Headers
+                        > Click 'Set shared headers'
+                            > Connection settings
+                                > Shared headers
+                                  header key: Authorization       value: Bearer {{USER_TOKEN}}
+                            Click 'Save'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
