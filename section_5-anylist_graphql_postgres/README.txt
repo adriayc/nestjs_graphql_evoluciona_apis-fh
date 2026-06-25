@@ -24,6 +24,9 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ yarn add class-validator class-transformer
         + Bcrypt (Hash password)
             $ yarn add bcrypt
+        + Passport and JWT (Authentication)
+            $ yarn add @nestjs/passport passport
+            $ yarn add @nestjs/jwt passport-jwt
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
