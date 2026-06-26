@@ -211,6 +211,8 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 roles
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "roles": "admin"
