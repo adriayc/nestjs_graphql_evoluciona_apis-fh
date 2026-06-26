@@ -199,6 +199,27 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 > Shared headers
                                   header key: Authorization       value: Bearer {{USER_TOKEN}}
                             Click 'Save'
+            * User
+                - users
+                    > Operation
+                        query Users($roles: [String!]) {
+                            users(roles: $roles) {
+                                id
+                                fullName
+                                email
+                                isActive
+                                roles
+                            }
+                        }
+                    > Variables
+                        {
+                            "roles": "admin"
+                        }
+
+                        {
+                            "roles": ["admin","user"]
+                        }
+                    CLick 'Users'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
