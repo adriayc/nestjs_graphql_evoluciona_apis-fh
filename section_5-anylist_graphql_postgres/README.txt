@@ -200,7 +200,7 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                   header key: Authorization       value: Bearer {{USER_TOKEN}}
                             Click 'Save'
             * User
-                - users
+                - users (Query)
                     > Operation
                         query Users($roles: [String!]) {
                             users(roles: $roles) {
@@ -222,7 +222,7 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             "roles": ["admin","user"]
                         }
                     CLick 'Users'
-                - user
+                - user (Query)
                     > Operation
                         query User($userId: ID!) {
                             user(id: $userId) {
@@ -239,6 +239,24 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             "userId": "27c495bf-8f8b-4e89-bbde-294af8347983"
                         }
                     Click 'User'
+                - userBlock (Mutation)
+                    > Operation
+                        mutation BlockUser($blockUserId: ID!) {
+                            blockUser(id: $blockUserId) {
+                                id
+                                fullName
+                                email
+                                isActive
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "blockUserId": "{{USER_ID}"
+                        }
+                    Click 'BlockUser'
+
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
