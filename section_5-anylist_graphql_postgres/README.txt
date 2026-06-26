@@ -222,6 +222,23 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             "roles": ["admin","user"]
                         }
                     CLick 'Users'
+                - user
+                    > Operation
+                        query User($userId: ID!) {
+                            user(id: $userId) {
+                                id
+                                fullName
+                                email
+                                isActive
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "userId": "27c495bf-8f8b-4e89-bbde-294af8347983"
+                        }
+                    Click 'User'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
