@@ -37,7 +37,12 @@ export class UsersService {
   }
 
   findAll(roles: ValidRoles[]): Promise<User[]> {
-    if (roles.length === 0) return this.usersRepository.find();
+    if (roles.length === 0)
+      return this.usersRepository.find(/*{
+        relations: {
+          lastUpdateBy: true, // Show relations
+        },
+      }*/);
 
     // Usamos queryBuilder si existe roles (pasado como args)
     return this.usersRepository
@@ -67,9 +72,10 @@ export class UsersService {
     }
   }
 
-  async block(id: string): Promise<User> {
+  async block(id: string, adminUser: User): Promise<User> {
     const userToBlock = await this.findOneById(id);
     userToBlock.isActive = false;
+    userToBlock.lastUpdateBy = adminUser; // Add admin user
 
     return await this.usersRepository.save(userToBlock);
   }

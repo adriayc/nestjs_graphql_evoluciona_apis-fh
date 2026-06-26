@@ -209,6 +209,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 email
                                 isActive
                                 roles
+                                lastUpdateBy {
+                                    id
+                                    fullName
+                                }
                             }
                         }
                     > Headers
@@ -230,6 +234,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 fullName
                                 email
                                 isActive
+                                lastUpdateBy {
+                                    id
+                                    fullName
+                                }
                             }
                         }
                     > Headers
@@ -247,6 +255,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 fullName
                                 email
                                 isActive
+                                lastUpdateBy {
+                                    id
+                                    fullName
+                                }
                             }
                         }
                     > Headers
