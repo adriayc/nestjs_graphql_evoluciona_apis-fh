@@ -12,6 +12,7 @@ import bcrypt from 'bcrypt';
 
 import { User } from './entities/user.entity';
 import { SignupInput } from 'src/auth/dto/inputs/signup.input';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 
 @Injectable()
 export class UsersService {
@@ -35,8 +36,15 @@ export class UsersService {
     }
   }
 
-  findAll(): Promise<User[]> {
-    throw new NotImplementedException('findAll method not implemented');
+  findAll(roles: ValidRoles[]): Promise<User[]> {
+    if (roles.length === 0) return this.usersRepository.find();
+
+    // Usamos queryBuilder si existe roles (pasado como args)
+    return this.usersRepository
+      .createQueryBuilder()
+      .andWhere('ARRAY[roles] && ARRAY[:...roles]')
+      .setParameter('roles', roles)
+      .getMany();
   }
 
   async findOneByEmail(email: string): Promise<User> {
