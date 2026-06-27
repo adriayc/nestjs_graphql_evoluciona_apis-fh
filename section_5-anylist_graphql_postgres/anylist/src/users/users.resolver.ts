@@ -1,9 +1,5 @@
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
-import {
-  NotImplementedException,
-  ParseUUIDPipe,
-  UseGuards,
-} from '@nestjs/common';
+import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
@@ -11,6 +7,7 @@ import { ValidRolesArgs } from './dto/args/roles.arg';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { UpdateUserInput } from './dto/update-user.input';
 
 @Resolver(() => User)
 @UseGuards(JwtAuthGuard) // Proteger a nivel de resolver
@@ -30,6 +27,14 @@ export class UsersResolver {
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
   ): Promise<User> {
     return this.usersService.findOneById(id);
+  }
+
+  @Mutation(() => User, { name: 'updateUser' })
+  async udpateUser(
+    @Args('updateUserInput') updateUserInput: UpdateUserInput,
+    @CurrentUser([ValidRoles.admin]) user: User,
+  ): Promise<User> {
+    return this.usersService.update(updateUserInput.id, updateUserInput, user);
   }
 
   @Mutation(() => User, { name: 'blockUser' })

@@ -4,7 +4,6 @@ import {
   InternalServerErrorException,
   Logger,
   NotFoundException,
-  NotImplementedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,6 +12,7 @@ import bcrypt from 'bcrypt';
 import { User } from './entities/user.entity';
 import { SignupInput } from 'src/auth/dto/inputs/signup.input';
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UsersService {
@@ -69,6 +69,25 @@ export class UsersService {
       return await this.usersRepository.findOneByOrFail({ id });
     } catch (error) {
       throw new NotFoundException(`User with id #${id} not found`);
+    }
+  }
+
+  async update(
+    id: string,
+    updateUserInput: UpdateUserInput,
+    adminUser: User,
+  ): Promise<User> {
+    try {
+      const user = (await this.usersRepository.preload({
+        ...updateUserInput,
+        id,
+      })) as User;
+      user.lastUpdateBy = adminUser;
+      // user.roles = u;
+
+      return await this.usersRepository.save(user);
+    } catch (error) {
+      this.handlerDBError(error);
     }
   }
 

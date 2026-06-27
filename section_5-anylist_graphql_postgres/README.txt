@@ -268,7 +268,34 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             "blockUserId": "{{USER_ID}"
                         }
                     Click 'BlockUser'
-
+                - updateUser
+                    > Operation
+                        mutation UpdateUser($updateUserInput: UpdateUserInput!) {
+                            updateUser(updateUserInput: $updateUserInput) {
+                                id
+                                fullName
+                                email
+                                roles
+                                isActive
+                                lastUpdateBy {
+                                fullName, email
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "updateUserInput": {
+                                "id": "8e73f75f-3e23-47ea-9794-52466e39913e",
+                                // "fullName": "Adriano Ayala Updated",
+                                // "email": "adriano@mail.com",
+                                "isActive": true,
+                                // "roles": "admin", // overwrites the roles
+                                "roles": ["admin", "superUser"]
+                            }
+                        }
+                    Click "UpdateUser"
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
