@@ -1,11 +1,16 @@
 import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import {
+  ApolloDriver,
+  // , ApolloDriverConfig
+} from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { ConfigModule } from '@nestjs/config';
-import { ItemsModule } from './items/items.module';
+import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { ItemsModule } from './items/items.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -13,15 +18,42 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     // Config setup (enviroments)
     ConfigModule.forRoot(),
-    // GraphQL setup
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    // GraphQL setup (síncrono)
+    // GraphQLModule.forRoot<ApolloDriverConfig>({
+    //   driver: ApolloDriver,
+    //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    //   playground: false,
+    //   plugins: [
+    //     // Apolo sandbox (studio) setup
+    //     ApolloServerPluginLandingPageLocalDefault(),
+    //   ],
+    // }),
+    // GraphQL setup (asíncrono)
+    GraphQLModule.forRootAsync({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      playground: false,
-      plugins: [
-        // Apolo sandbox (studio) setup
-        ApolloServerPluginLandingPageLocalDefault(),
+      imports: [
+        /* Importar módulos */
+        AuthModule,
       ],
+      inject: [
+        /* Inyectar servicios */
+        JwtService,
+      ],
+      useFactory: (jwtService: JwtService) => ({
+        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        playground: false,
+        plugins: [
+          // Apolo sandbox (studio) setup
+          ApolloServerPluginLandingPageLocalDefault(),
+        ],
+        context({ req }) {
+          // Bloquea el GQLSchema - Comentado!!!
+          // const token = req.headers.authorization?.replace('Bearer ', '');
+          // if (!token) throw new Error('Token needed');
+          // const payload = jwtService.decode(token);
+          // if (!payload) throw new Error('Token not valid');
+        },
+      }),
     }),
     // TypeORM (Postgres)
     TypeOrmModule.forRoot({
