@@ -80,6 +80,11 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 id
                                 name
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
                     > Headers
@@ -91,10 +96,16 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             item(id: $itemId) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "itemId": "{{ITEM_ID}}"
@@ -125,10 +136,11 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             removeItem(id: $removeItemId) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "removeItemId": "{{ITEM_ID}}"

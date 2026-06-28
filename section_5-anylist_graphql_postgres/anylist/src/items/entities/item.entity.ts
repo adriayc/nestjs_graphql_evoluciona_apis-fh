@@ -36,7 +36,7 @@ export class Item {
   // store
 
   // Relacion (n:1) con User
-  @ManyToOne(() => User, (user) => user.items, { nullable: false })
+  @ManyToOne(() => User, (user) => user.items, { nullable: false, lazy: true }) // lazy carga la info de la relacion
   @Index('userId-index') // Agrear un index
   @Field(() => User)
   user!: User;
