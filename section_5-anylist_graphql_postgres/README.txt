@@ -231,6 +231,20 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 }
                             }
                         }
+
+                        query Users {
+                            users {
+                                id
+                                fullName
+                                email
+                                isActive
+                                roles
+                                items {
+                                    id
+                                    name
+                                }
+                            }
+                        }
                     > Headers
                         [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables

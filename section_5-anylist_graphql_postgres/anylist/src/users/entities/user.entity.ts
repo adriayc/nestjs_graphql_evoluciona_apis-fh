@@ -55,7 +55,7 @@ export class User {
   lastUpdateBy?: User;
 
   // Relacion (1:n) con Item
-  @OneToMany(() => Item, (item) => item.user)
+  @OneToMany(() => Item, (item) => item.user, { lazy: true }) // lazy - agregar los items (relaciones)
   @Field(() => [Item])
   items!: Item[];
 }
