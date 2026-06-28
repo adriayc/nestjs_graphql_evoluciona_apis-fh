@@ -11,5 +11,9 @@ import { Item } from './entities/item.entity';
     // TypeORM config
     TypeOrmModule.forFeature([Item]),
   ],
+  exports: [
+    // Item service
+    ItemsService,
+  ],
 })
 export class ItemsModule {}

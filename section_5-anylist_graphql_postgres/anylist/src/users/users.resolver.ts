@@ -1,4 +1,13 @@
-import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  ID,
+  ResolveField,
+  Int,
+  Parent,
+} from '@nestjs/graphql';
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 
 import { UsersService } from './users.service';
@@ -8,11 +17,16 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 import { UpdateUserInput } from './dto/update-user.input';
+import { ItemsService } from 'src/items/items.service';
 
 @Resolver(() => User)
 @UseGuards(JwtAuthGuard) // Proteger a nivel de resolver
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+
+    private readonly itemsService: ItemsService,
+  ) {}
 
   @Query(() => [User], { name: 'users' })
   findAll(
@@ -43,5 +57,18 @@ export class UsersResolver {
     @CurrentUser([ValidRoles.admin]) user: User,
   ): Promise<User> {
     return this.usersService.block(id, user);
+  }
+
+  /**
+   * @ResolverField se utiliza para resolver el valor de un campo especifico dentro de un tipo de objeto (Entity/ObjectType).
+   * Funciona de manera similar a un join en un DBs: cuando consultas un objeto principal y solicitas un campo anidado, este
+   * decorador se active para obtener esa informacion de forma independiente.
+   */
+  @ResolveField(() => Int, { name: 'itemCount' })
+  async itemCount(
+    @CurrentUser([ValidRoles.admin]) adminUser: User,
+    @Parent() user: User, // El decorador @Parent brinda acceso total a los datos recuperados del User
+  ): Promise<number> {
+    return this.itemsService.itemCountByUser(user);
   }
 }

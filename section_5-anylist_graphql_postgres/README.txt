@@ -239,6 +239,7 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 email
                                 isActive
                                 roles
+                                itemCount # ResolveField con info del padre
                                 items {
                                     id
                                     name
