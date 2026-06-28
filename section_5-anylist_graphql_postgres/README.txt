@@ -55,23 +55,21 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             createItem(createItemInput: $createItemInput) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "createItemInput": {
-                                "name": "Pañales",
-                                "quantity": 1
-                            }
-                        }
-
-                        {
-                            "createItemInput": {
-                                "name": "Uvas",
-                                "quantity": 2,
-                                "quentityUnits": "lb"
+                                "name": "Donas de D&D ",
+                                "quantityUnits": "unit"
                             }
                         }
                     Click 'CreateItem'

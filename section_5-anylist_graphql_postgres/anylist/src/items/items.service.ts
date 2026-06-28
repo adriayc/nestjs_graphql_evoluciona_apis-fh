@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 import { CreateItemInput, UpdateItemInput } from './dto/inputs';
 import { Item } from './entities/item.entity';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class ItemsService {
@@ -12,8 +13,8 @@ export class ItemsService {
     private readonly itemsRepository: Repository<Item>,
   ) {}
 
-  async create(createItemInput: CreateItemInput): Promise<Item> {
-    const newItem = this.itemsRepository.create(createItemInput); // Crear el item
+  async create(createItemInput: CreateItemInput, user: User): Promise<Item> {
+    const newItem = this.itemsRepository.create({ ...createItemInput, user }); // Crear el item
     return await this.itemsRepository.save(newItem); // Guardar en la DB y retorna el item
   }
 
