@@ -113,20 +113,25 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                     Click 'Item'
                 - updateItem (Mutation)
                     > Operation
-                        mutation UpdateItem($updateItemInput: UpdateItemInput!) {
+                        mutation Mutation($updateItemInput: UpdateItemInput!) {
                             updateItem(updateItemInput: $updateItemInput) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "updateItemInput": {
-                                "id": "f76a3ac5-a67c-4639-adb9-8c6363837533",
-                                "name": "Pañales Updated",
-                                // "quantity": 2
+                                "id": "2cf82556-11de-42ed-83dd-47198eb94334",
+                                "quantityUnits": "porcion"
                             }
                         }
                     Click 'UpdateItem'
