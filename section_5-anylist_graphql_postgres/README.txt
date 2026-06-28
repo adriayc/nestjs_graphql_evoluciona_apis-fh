@@ -79,10 +79,11 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             items {
                                 id
                                 name
-                                quantity
                                 quantityUnits
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     Click 'Items'
                 - item (Query)
                     > Operation
