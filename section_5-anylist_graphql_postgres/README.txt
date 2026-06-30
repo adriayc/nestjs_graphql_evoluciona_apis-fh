@@ -49,6 +49,8 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ nest g res seed --no-spec
                 > ? What transport layer do you use? GraphQL (code first)
                 > ? Would you like to generate CRUD entry points? (Y/n) n
+        * Crear un nuevo module
+            $ nest g mo common
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
@@ -93,6 +95,24 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         }
                     > Headers
                         [x] Authorization   Bearer {{USER_TOKEN}}
+                    Click 'Items'
+
+                    Pagination and Filter
+                    > Operation
+                        query Items($limit: Int, $offset: Int) {
+                            items(limit: $limit, offset: $offset) {
+                                name
+                                id
+                                quantityUnits
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                    {
+                        "limit": 1,     # Default 10
+                        "offset": 10    # Default 0
+                    }
                     Click 'Items'
                 - item (Query)
                     > Operation
