@@ -30,16 +30,30 @@ export class ItemsService {
     const { search } = searchArgs;
 
     // Filtrar, paginar, por usuario...
-    return await this.itemsRepository.find({
-      where: {
-        user: {
-          id: user.id, // Filter by user
-        },
-        name: ILike(`%${search}%`), // Filter by name (ILike - case-insensitive)
-      },
-      take: limit,
-      skip: offset,
-    });
+    // return await this.itemsRepository.find({
+    //   where: {
+    //     user: {
+    //       id: user.id, // Filter by user
+    //     },
+    //     name: ILike(`%${search}%`), // Filter by name (ILike - case-insensitive)
+    //   },
+    //   take: limit,
+    //   skip: offset,
+    // });
+
+    const queryBuilder = this.itemsRepository
+      .createQueryBuilder()
+      .where('"userId" = :userId', { userId: user.id })
+      .limit(limit)
+      .offset(offset);
+
+    if (search) {
+      queryBuilder.andWhere('LOWER(name) like :name', {
+        name: `%${search.toLowerCase()}%`,
+      });
+    }
+
+    return queryBuilder.getMany();
   }
 
   async findOne(id: string, user: User) {
