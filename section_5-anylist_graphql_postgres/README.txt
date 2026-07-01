@@ -110,8 +110,9 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                     {
-                        "limit": 1,     # Default 10
-                        "offset": 10    # Default 0
+                        "limit": 5,     # Default 10
+                        "offset": 0     # Default 0
+                        "search": "rice"
                     }
                     Click 'Items'
                 - item (Query)
@@ -281,6 +282,29 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             "roles": ["admin","user"]
                         }
                     CLick 'Users'
+
+                    Pagination and Filter
+                    > Operation
+                        query Users($limit: Int, $offset: Int, $search: String) {
+                            users {
+                                id
+                                fullName
+                                email
+                                items(limit: $limit, offset: $offset, search: $search) {
+                                    id
+                                    name
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "limit": 5,
+                            "offset": 0,
+                            "search": "rice"
+                        }
+                    CLick 'Users'
                 - user (Query)
                     > Operation
                         query User($userId: ID!) {
@@ -301,6 +325,30 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         {
                             "userId": "27c495bf-8f8b-4e89-bbde-294af8347983"
                         }
+                    Click 'User'
+
+                    Pagination and Search
+                    > Operation
+                        query Query($userId: ID!, $limit: Int, $offset: Int, $search: String) {
+                            user(id: $userId) {
+                                id
+                                fullName
+                                email
+                                items(limit: $limit, offset: $offset, search: $search) {
+                                    id
+                                    name
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                    {
+                        "userId": "{{USER_ID}",
+                        "limit": 5,
+                        "offset": 0,
+                        "search": "rice"
+                    }
                     Click 'User'
                 - userBlock (Mutation)
                     > Operation
