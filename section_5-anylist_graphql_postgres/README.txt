@@ -51,6 +51,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                 > ? Would you like to generate CRUD entry points? (Y/n) n
         * Crear un nuevo module
             $ nest g mo common
+        * Crear un nuevo resource (no test file)
+            $ nest g res lists --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) y
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
@@ -410,6 +414,89 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             executeSeed
                         }
                     Click 'ExecuteSeed'
+            * List
+                - createList (Mutation)
+                    > Operation:
+                        mutation Mutation($createListInput: CreateListInput!) {
+                            createList(createListInput: $createListInput) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "createListInput": {
+                                "name": "List #12"
+                            }
+                        }
+                    Click 'Mutation'
+                - lists (query)
+                    > Operation
+                        query Query($limit: Int, $offset: Int, $search: String) {
+                            lists(limit: $limit, offset: $offset, search: $search) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "limit": 10,
+                            "offset": 0,
+                            "search": "list #1"
+                        }
+                    Click 'Query'
+                - list (query)
+                    > Operation
+                        query List($listId: ID!) {
+                            list(id: $listId) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "listId": "3eb51617-e81b-4f58-9cee-be914f75391f"
+                        }
+                    Click 'Query'
+                - updateList (Mutation)
+                    > Operation:
+                        mutation Mutation($updateListInput: UpdateListInput!) {
+                            updateList(updateListInput: $updateListInput) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "updateListInput": {
+                                "id": "{{LIST_ID}}",
+                                "name": "First List Updated"
+                            }
+                        }
+                    Click 'Mutation'
+                - deleteList (Mutation)
+                    > Operation
+                        mutation Mutation($removeListId: ID!) {
+                            removeList(id: $removeListId) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "removeListId": "{{LIST_ID}}"
+                        }
+                    Click 'Mutation'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
