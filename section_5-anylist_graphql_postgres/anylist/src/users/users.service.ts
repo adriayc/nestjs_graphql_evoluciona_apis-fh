@@ -13,6 +13,7 @@ import { User } from './entities/user.entity';
 import { SignupInput } from 'src/auth/dto/inputs/signup.input';
 import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
 import { UpdateUserInput } from './dto/update-user.input';
+import { PaginationArgs } from '../common/dto/args/pagination.args';
 
 @Injectable()
 export class UsersService {
@@ -36,19 +37,28 @@ export class UsersService {
     }
   }
 
-  findAll(roles: ValidRoles[]): Promise<User[]> {
+  findAll(
+    roles: ValidRoles[],
+    paginationArgs: PaginationArgs,
+  ): Promise<User[]> {
+    const { limit, offset } = paginationArgs;
+
     if (roles.length === 0)
-      return this.usersRepository.find(/*{
-        relations: {
-          lastUpdateBy: true, // Show relations
-        },
-      }*/);
+      return this.usersRepository.find({
+        // relations: {
+        //   lastUpdateBy: true, // Show relations
+        // },
+        take: limit,
+        skip: offset,
+      });
 
     // Usamos queryBuilder si existe roles (pasado como args)
     return this.usersRepository
       .createQueryBuilder()
       .andWhere('ARRAY[roles] && ARRAY[:...roles]')
       .setParameter('roles', roles)
+      .limit(limit)
+      .offset(offset)
       .getMany();
   }
 

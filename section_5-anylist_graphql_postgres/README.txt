@@ -285,12 +285,14 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
 
                     Pagination and Filter
                     > Operation
-                        query Users($limit: Int, $offset: Int, $search: String) {
-                            users {
+                        query Users($limit: Int, $offset: Int, $itemsLimit2: Int, $itemsOffset2: Int, $search: String) {
+                            users(limit: $limit, offset: $offset) {
                                 id
                                 fullName
                                 email
-                                items(limit: $limit, offset: $offset, search: $search) {
+                                isActive
+                                roles
+                                items(limit: $itemsLimit2, offset: $itemsOffset2, search: $search) {
                                     id
                                     name
                                 }
@@ -300,8 +302,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
-                            "limit": 5,
+                            "limit": 2,
                             "offset": 0,
+                            "itemsLimit2": 5,
+                            "itemsOffset2": 0,
                             "search": "rice"
                         }
                     CLick 'Users'
