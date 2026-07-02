@@ -289,14 +289,18 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
 
                     Pagination and Filter
                     > Operation
-                        query Users($limit: Int, $offset: Int, $itemsLimit2: Int, $itemsOffset2: Int, $search: String) {
-                            users(limit: $limit, offset: $offset) {
+                        query Users($offset: Int, $limit: Int, $itemsLimit2: Int, $itemsOffset2: Int, $listsLimit2: Int, $listsOffset2: Int, $search: String, $listsSearch2: String) {
+                            users(offset: $offset, limit: $limit) {
                                 id
                                 fullName
                                 email
-                                isActive
-                                roles
+                                itemCount
                                 items(limit: $itemsLimit2, offset: $itemsOffset2, search: $search) {
+                                    id
+                                    name
+                                }
+                                listCount
+                                lists(limit: $listsLimit2, offset: $listsOffset2, search: $listsSearch2) {
                                     id
                                     name
                                 }
@@ -306,11 +310,14 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
-                            "limit": 2,
                             "offset": 0,
-                            "itemsLimit2": 5,
+                            "limit": 10,
+                            "itemsLimit2": 3,
                             "itemsOffset2": 0,
-                            "search": "rice"
+                            // "search": "rice",
+                            "listsLimit2": 3,
+                            "listsOffset2": 0,
+                            // "listsSearch2": "list #1",
                         }
                     CLick 'Users'
                 - user (Query)
