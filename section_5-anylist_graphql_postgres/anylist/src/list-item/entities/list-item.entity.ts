@@ -1,10 +1,17 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 
 import { List } from 'src/lists/entities/list.entity';
 import { Item } from 'src/items/entities/item.entity';
 
 @Entity({ name: 'listItems' })
+@Unique('listItem-item', ['list', 'item']) // Constrain - crea una restricción única de DB (Evita tener registros duplicados)
 @ObjectType()
 export class ListItem {
   @PrimaryGeneratedColumn('uuid')

@@ -55,6 +55,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ nest g res lists --no-spec
                 > ? What transport layer do you use? GraphQL (code first)
                 > ? Would you like to generate CRUD entry points? (Y/n) y
+        * Crear un nuevo resource (no test file)
+            $ nest g res listItem --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) y
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
@@ -502,6 +506,27 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                     > Variables
                         {
                             "removeListId": "{{LIST_ID}}"
+                        }
+                    Click 'Mutation'
+            * ListItem
+                - createListItem (Mutation)
+                    > Operation
+                        mutation Mutation($createListItemInput: CreateListItemInput!) {
+                            createListItem(createListItemInput: $createListItemInput) {
+                                id
+                                quantity
+                                completed
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "createListItemInput": {
+                                "itemId": "{{ITEM_ID}}",
+                                "listId": "{{LIST_ID}",
+                                "quantity": 10
+                            }
                         }
                     Click 'Mutation'
 
