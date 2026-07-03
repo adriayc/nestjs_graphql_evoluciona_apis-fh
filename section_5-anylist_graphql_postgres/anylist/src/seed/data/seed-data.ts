@@ -22,6 +22,12 @@ export const SEED_USERS = [
   },
 ];
 
+export const SEED_LISTS = [
+  { name: 'Supermercado' },
+  { name: 'Diario' },
+  { name: 'Fin de semana' },
+];
+
 // NOTE: We replace null with undefined of quantityUnits
 export const SEED_ITEMS = [
   {

@@ -5,11 +5,13 @@ import { Repository } from 'typeorm';
 
 import { Item } from 'src/items/entities/item.entity';
 import { User } from 'src/users/entities/user.entity';
-import { SEED_ITEMS, SEED_USERS } from './data/seed-data';
+import { SEED_ITEMS, SEED_LISTS, SEED_USERS } from './data/seed-data';
 import { UsersService } from 'src/users/users.service';
 import { ItemsService } from 'src/items/items.service';
 import { ListItem } from 'src/list-item/entities/list-item.entity';
 import { List } from 'src/lists/entities/list.entity';
+import { ListsService } from 'src/lists/lists.service';
+import { ListItemService } from '../list-item/list-item.service';
 
 @Injectable()
 export class SeedService {
@@ -29,6 +31,8 @@ export class SeedService {
 
     private readonly userService: UsersService,
     private readonly itemsService: ItemsService,
+    private readonly listsService: ListsService,
+    private readonly listItemsService: ListItemService,
   ) {
     this.isProd = configService.get('NEST_ENV') === 'prod';
   }
@@ -47,6 +51,13 @@ export class SeedService {
 
     // Crear items
     await this.loadItems(user);
+
+    // Crear lists
+    const list = await this.loadLists(user);
+
+    // Crear listItems
+    const items = await this.itemsService.findAll(user, { limit: 15 }, {});
+    await this.loadListItems(list, items);
 
     return true;
   }
@@ -98,5 +109,26 @@ export class SeedService {
     }
 
     await Promise.all(itemsPromise);
+  }
+
+  async loadLists(user: User): Promise<List> {
+    const lists: List[] = [];
+
+    for (const list of SEED_LISTS) {
+      lists.push(await this.listsService.create(list, user));
+    }
+
+    return lists[0];
+  }
+
+  async loadListItems(list: List, items: Item[]): Promise<void> {
+    for (const item of items) {
+      this.listItemsService.create({
+        quantity: Math.round(Math.random() * 10),
+        completed: Math.round(Math.random() * 1) === 0 ? false : true,
+        listId: list.id,
+        itemId: item.id,
+      });
+    }
   }
 }
