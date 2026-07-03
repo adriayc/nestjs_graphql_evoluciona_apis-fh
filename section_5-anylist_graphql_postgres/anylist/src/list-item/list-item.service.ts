@@ -58,8 +58,22 @@ export class ListItemService {
     return listItem;
   }
 
-  update(id: number, updateListItemInput: UpdateListItemInput) {
-    return `This action updates a #${id} listItem`;
+  async update(
+    id: string,
+    updateListItemInput: UpdateListItemInput,
+  ): Promise<ListItem> {
+    const { listId, itemId, ...rest } = updateListItemInput;
+
+    // Update with respository (No actualiza correctamente las relaciones)
+    const listItem = await this.listItemRepository.preload({
+      ...rest,
+      list: { id: listId },
+      item: { id: itemId },
+    });
+    if (!listItem)
+      throw new NotFoundException(`List item with #${id} not found`);
+
+    return this.listItemRepository.save(listItem);
   }
 
   remove(id: number) {

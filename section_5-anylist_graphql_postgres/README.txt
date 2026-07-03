@@ -565,6 +565,33 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             "listItemId": "{{LISTITEM_ID}}"
                         }
                     Click 'Query'
+                - updateListItem (Mutation)
+                    > Operation
+                        mutation Mutation($updateListItemInput: UpdateListItemInput!) {
+                            updateListItem(updateListItemInput: $updateListItemInput) {
+                                id
+                                quantity
+                                completed
+                                item {
+                                    name
+                                }
+                                list {
+                                    name
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "updateListItemInput": {
+                                "id": "{{LISTITEM_ID}",
+                                "quantity": 5,
+                                "completed": true,
+                                "listId": "{{ANOTHER_LIST_ID}"
+                            }
+                        }
+                    Click 'Mutation'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
