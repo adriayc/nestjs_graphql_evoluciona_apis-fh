@@ -604,7 +604,8 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             > Database's name: {POSTGRES_DB}}
             Click 'Test' | 'Save' | 'Connect'
 
-
 * VSCode
     - Shortcuts
         + Reload Window (CTRL + SHIFT + P > Search:... 'Developer: Reload Window')
+
+* Deployment en DigitalOcean
