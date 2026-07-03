@@ -8,6 +8,8 @@ import { User } from 'src/users/entities/user.entity';
 import { SEED_ITEMS, SEED_USERS } from './data/seed-data';
 import { UsersService } from 'src/users/users.service';
 import { ItemsService } from 'src/items/items.service';
+import { ListItem } from 'src/list-item/entities/list-item.entity';
+import { List } from 'src/lists/entities/list.entity';
 
 @Injectable()
 export class SeedService {
@@ -20,6 +22,10 @@ export class SeedService {
     private readonly itemsRepository: Repository<Item>,
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+    @InjectRepository(ListItem)
+    private readonly listItemsRepository: Repository<ListItem>,
+    @InjectRepository(List)
+    private readonly listsRepository: Repository<List>,
 
     private readonly userService: UsersService,
     private readonly itemsService: ItemsService,
@@ -46,12 +52,26 @@ export class SeedService {
   }
 
   async deleteDB() {
+    // Delete listItems
+    await this.listItemsRepository
+      .createQueryBuilder()
+      .delete()
+      .where({})
+      .execute();
+
+    await this.listsRepository
+      .createQueryBuilder()
+      .delete()
+      .where({})
+      .execute();
+
     // Delete items
     await this.itemsRepository
       .createQueryBuilder()
       .delete()
       .where({})
       .execute();
+
     // Delete users
     await this.usersRepository
       .createQueryBuilder()

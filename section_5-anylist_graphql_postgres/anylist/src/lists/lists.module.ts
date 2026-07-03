@@ -15,6 +15,7 @@ import { ListItemModule } from 'src/list-item/list-item.module';
     ListItemModule,
   ],
   exports: [
+    TypeOrmModule,
     // ListService
     ListsService,
   ],
