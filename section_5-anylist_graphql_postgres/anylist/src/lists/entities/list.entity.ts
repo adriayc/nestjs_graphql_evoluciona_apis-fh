@@ -30,6 +30,6 @@ export class List {
 
   // Relacion (1:n) con ListItem
   @OneToMany(() => ListItem, (listItem) => listItem.list, { lazy: true })
-  @Field(() => [ListItem])
+  // @Field(() => [ListItem])
   listItem!: ListItem[];
 }

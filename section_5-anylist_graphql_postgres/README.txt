@@ -112,6 +112,11 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 name
                                 id
                                 quantityUnits
+                                items {
+                                    id
+                                    quantity
+                                    completed
+                                }
                             }
                         }
                     > Headers

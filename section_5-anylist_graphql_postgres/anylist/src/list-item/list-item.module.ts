@@ -11,5 +11,9 @@ import { ListItem } from './entities/list-item.entity';
     // TypeOrmModule setup
     TypeOrmModule.forFeature([ListItem]),
   ],
+  exports: [
+    // Services
+    ListItemService,
+  ],
 })
 export class ListItemModule {}
