@@ -112,10 +112,15 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 name
                                 id
                                 quantityUnits
+                                itemCount
                                 items {
                                     id
                                     quantity
                                     completed
+                                    item {
+                                        id
+                                        name
+                                    }
                                 }
                             }
                         }

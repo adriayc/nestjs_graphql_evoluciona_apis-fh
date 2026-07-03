@@ -28,7 +28,7 @@ export class ListItem {
 
   // Realacion (n:1) con List
   @ManyToOne(() => List, (list) => list.listItem, { lazy: true })
-  // @Field(() => List)
+  @Field(() => List)
   list!: List;
 
   // Relación (n:1) con Item

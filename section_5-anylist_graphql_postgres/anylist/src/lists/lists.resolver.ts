@@ -19,6 +19,8 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { PaginationArgs, SearchArgs } from 'src/common/dto/args';
 import { ListItem } from 'src/list-item/entities/list-item.entity';
 import { ListItemService } from 'src/list-item/list-item.service';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { ItemsService } from 'src/items/items.service';
 
 @Resolver(() => List)
 @UseGuards(JwtAuthGuard) // JwtAuth (Security)
@@ -69,8 +71,20 @@ export class ListsResolver {
     return this.listsService.remove(id, user);
   }
 
+  @ResolveField(() => Int, { name: 'itemCount' })
+  async listItemsCountByList(
+    @CurrentUser([ValidRoles.admin]) adminUser: User,
+    @Parent() list: List,
+  ): Promise<number> {
+    return this.listItemsService.listItemsCountByList(list);
+  }
+
   @ResolveField(() => [ListItem], { name: 'items' })
-  async getListItems(@Parent() list: List): Promise<ListItem[]> {
-    return this.listItemsService.findAll();
+  async getListItems(
+    @Parent() list: List,
+    @Args() paginationArgs: PaginationArgs,
+    @Args() searchArgs: SearchArgs,
+  ): Promise<ListItem[]> {
+    return this.listItemsService.findAll(list, paginationArgs, searchArgs);
   }
 }

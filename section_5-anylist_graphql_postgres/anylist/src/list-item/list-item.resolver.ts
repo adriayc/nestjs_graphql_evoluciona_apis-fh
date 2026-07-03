@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Parent } from '@nestjs/graphql';
 
 import { ListItemService } from './list-item.service';
 import { ListItem } from './entities/list-item.entity';
@@ -19,10 +19,10 @@ export class ListItemResolver {
     return this.listItemService.create(createListItemInput);
   }
 
-  @Query(() => [ListItem], { name: 'listItem' })
-  findAll() {
-    return this.listItemService.findAll();
-  }
+  // @Query(() => [ListItem], { name: 'listItem' })
+  // findAll() {
+  //   return this.listItemService.findAll();
+  // }
 
   // @Query(() => ListItem, { name: 'listItem' })
   // findOne(@Args('id', { type: () => Int }) id: number) {
