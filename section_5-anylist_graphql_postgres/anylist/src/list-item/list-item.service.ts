@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateListItemInput, UpdateListItemInput } from './dto/inputs';
@@ -50,8 +50,12 @@ export class ListItemService {
     return queryBuilder.getMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} listItem`;
+  async findOne(id: string) {
+    const listItem = await this.listItemRepository.findOneBy({ id });
+    if (!listItem)
+      throw new NotFoundException(`List item with id #${id} not found`);
+
+    return listItem;
   }
 
   update(id: number, updateListItemInput: UpdateListItemInput) {

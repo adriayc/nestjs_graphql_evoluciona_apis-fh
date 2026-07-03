@@ -539,6 +539,32 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             }
                         }
                     Click 'Mutation'
+                - listItem (Query)
+                    > Operation
+                        query Query($listItemId: ID!) {
+                            listItem(id: $listItemId) {
+                                id
+                                quantity
+                                completed
+                                list {
+                                    id
+                                    name
+                                    itemCount
+                                }
+                                item {
+                                    id
+                                    name
+                                    quantityUnits
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "listItemId": "{{LISTITEM_ID}}"
+                        }
+                    Click 'Query'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
