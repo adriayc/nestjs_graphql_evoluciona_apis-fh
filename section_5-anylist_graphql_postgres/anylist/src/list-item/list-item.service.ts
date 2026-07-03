@@ -65,15 +65,29 @@ export class ListItemService {
     const { listId, itemId, ...rest } = updateListItemInput;
 
     // Update with respository (No actualiza correctamente las relaciones)
-    const listItem = await this.listItemRepository.preload({
-      ...rest,
-      list: { id: listId },
-      item: { id: itemId },
-    });
-    if (!listItem)
-      throw new NotFoundException(`List item with #${id} not found`);
+    // const listItem = await this.listItemRepository.preload({
+    //   ...rest,
+    //   list: { id: listId },
+    //   item: { id: itemId },
+    // });
+    // if (!listItem)
+    //   throw new NotFoundException(`List item with #${id} not found`);
 
-    return this.listItemRepository.save(listItem);
+    // return this.listItemRepository.save(listItem);
+
+    // Update with queryBuilder
+    const queryBuilder = this.listItemRepository
+      .createQueryBuilder()
+      .update()
+      .set(rest)
+      .where('id = :id', { id });
+
+    if (listId) queryBuilder.set({ list: { id: listId } });
+    if (itemId) queryBuilder.set({ item: { id: itemId } });
+
+    await queryBuilder.execute();
+
+    return await this.findOne(id);
   }
 
   remove(id: number) {
