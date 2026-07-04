@@ -608,4 +608,13 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
     - Shortcuts
         + Reload Window (CTRL + SHIFT + P > Search:... 'Developer: Reload Window')
 
-* Deployment en DigitalOcean
+* Deployment
+    - DigitalOcean
+        + Sign Up/Sign In
+        + Select 'Default Project'
+        + Create Database (Resources > 'Create Database')
+            * Crear Database Cluster
+                > Application: PostgreSQL
+                > Choose a unique database cluster name: anylist-db-pgsql-cluster
+                > Select a project: {{DEFAULT_PROJECT}}
+                Click 'Create Database Cluster'
