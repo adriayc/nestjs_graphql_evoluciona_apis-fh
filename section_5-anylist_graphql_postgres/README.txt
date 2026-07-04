@@ -618,3 +618,29 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                 > Choose a unique database cluster name: anylist-db-pgsql-cluster
                 > Select a project: {{DEFAULT_PROJECT}}
                 Click 'Create Database Cluster'
+            * Getting Started (postgres-cluster > Overview > Click 'Get Started')
+                2. Secure this database cluster
+                    > Add trusted sources: {{YOUR_IP_ADDRESS}}
+                    Click 'Allow these inbound sources only'
+                3. Connection details
+                    > Public network
+                        > All Postgres credentials...
+                    Click 'Continue'
+                4. Next steps
+                    Click 'Great, I'm done'
+            * Create a new database (Postgres-cluster > Users & Databases)
+                > Databases
+                    > Database Name: anylistdb
+                    Click 'Save'
+            * Change our Database (postgres-cluster > Overview > CONNECTION DETAILS)
+                > Public network
+                    > Database/Pool: anylistdb
+            * Connect Database with TablePlus
+                > Crear a new connection | PostgreSQL (Crear a new connection... > PostgreSQL)
+                    > PostgreSQL Connection
+                        > Name: AnyList - DigitalOcean
+                        > Host/Socket: {{HOST}          > Post: {{PORT}
+                        > User: {{USERNAME}}
+                        > Password: {{PASSWORD}}
+                        > Database: {{DATABASE}}
+                        Click 'Test' | 'Save' | 'Connect'
