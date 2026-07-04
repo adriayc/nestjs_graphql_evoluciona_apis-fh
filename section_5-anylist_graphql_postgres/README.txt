@@ -644,3 +644,29 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         > Password: {{PASSWORD}}
                         > Database: {{DATABASE}}
                         Click 'Test' | 'Save' | 'Connect'
+        - Crear App (Resources > 'Create App')
+            > Create an app
+                1. Choose source
+                    > Git repository
+                        > Git provider: GitHub
+                        > Click '+ Connecdt GitHub account'
+                            > Repository: {{REPO_NAME}}
+                            > Branch: main
+                            > Source directories (Optional):
+                            [true] Autodeploy
+                    Click 'Next'
+                2. Configure app
+                    > Review and configure resource settings
+                        > Change app name (Info | Click 'Edit')
+                            > Name: anylist-app
+                            Click 'Close'
+                        > Add environment variables (Environment varialbes | Click 'Edit')
+                            > Key: {{KEY}}      Value: {{VALUE}}
+                            Click 'Close'
+                        > Add a database (Add a database | '+ Attach DigitalOcean database' > Previously Created DigitalOcean Database)
+                            > Database Cluster: {{DB_CLUSTER}}
+                            > Database: anylistdb
+                            > User: {{DB_USER}}
+                            Click 'Attach Database'
+                        > Choose a unique app name: anylist-nestjs-graphql-app
+                Click 'Create app'
