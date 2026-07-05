@@ -688,3 +688,10 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             * Run
                 $ docker compose -f docker-compose.prod.yml --env-file .env.prod up
                 > Open the URL in your browser: http://locahost:4000/graphql
+
+        + Build the image without compose
+            * Construir la imagen
+                $ docker build -t anylist-nest-graphql-app .
+            * Ejectutar la imagen
+                $ docker run -e PORT=4000 anylist-nest-graphql-app              # Agregar manualmente cada vars
+                $ docker run --env-file=.env.prod -p 80:4000 anylist-nest-graphql-app      # Agregar todos los env del archivo .env.prod
