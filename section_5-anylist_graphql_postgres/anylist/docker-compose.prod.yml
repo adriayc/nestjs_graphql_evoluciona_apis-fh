@@ -11,3 +11,23 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+  anylistapp:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nest-graphql-app
+    container_name: AnyListApp
+    restart: always # Reiniciar el contenedor si se detiene
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - PORT=${PORT}
+      - NEST_ENV=${NEST_ENV}
+      - JWT_SECRET=${JWT_SECRET}
