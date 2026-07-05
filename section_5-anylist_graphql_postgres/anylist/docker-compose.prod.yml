@@ -1,4 +1,5 @@
 services:
+  # Comment on the entire database service
   db:
     image: postgres:17.10
     container_name: anylistdb
@@ -12,6 +13,7 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
   anylistapp:
+    # Comment depends_on
     depends_on:
       - db
     build:

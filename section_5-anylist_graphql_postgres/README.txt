@@ -28,7 +28,7 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ yarn add @nestjs/passport passport
             $ yarn add @nestjs/jwt passport-jwt
         + Bcrypt.js (Optional there's an error with Bcrypt)
-            $ yarn add  bcryptjs
+            $ yarn add bcryptjs
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
