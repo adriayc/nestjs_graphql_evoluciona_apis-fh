@@ -27,10 +27,14 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
         + Passport and JWT (Authentication)
             $ yarn add @nestjs/passport passport
             $ yarn add @nestjs/jwt passport-jwt
+        + Bcrypt.js (Optional there's an error with Bcrypt)
+            $ yarn add  bcryptjs
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
             $ yarn remove prettier eslint-config-prettier eslint-plugin-prettier
+        + Bcrypt
+            $ yarn remove bcrypt
 
     - Nest CLI
         + Crear un nuevo resource (no test file)
