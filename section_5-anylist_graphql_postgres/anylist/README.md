@@ -8,6 +8,7 @@
 4. Descargar y configurar todas las dependencias `yarn install` o `yarn`
 5. Ejecutar o levantar la app `yarn run start:dev` o `yarn start:dev`.
 6. Abrir en el navegador la URL (Apollo sandbox): http://localhost:3000/graphql
+7. Ejecutar `executeSeed (Mutation)`, para agregar data a la DB (Only in development).
 
 ## NestJS
 

@@ -14,6 +14,7 @@ export class ItemsService {
   ) {}
 
   async create(createItemInput: CreateItemInput, user: User): Promise<Item> {
+    console.log(createItemInput);
     const newItem = this.itemsRepository.create({ ...createItemInput, user }); // Crear el item
     return await this.itemsRepository.save(newItem); // Guardar en la DB y retorna el item
   }
