@@ -22,6 +22,11 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ yarn add @nestjs/typeorm typeorm pg
         + Validator (Validación de la data)
             $ yarn add class-validator class-transformer
+        + Bcrypt (Hash password)
+            $ yarn add bcrypt
+        + Passport and JWT (Authentication)
+            $ yarn add @nestjs/passport passport
+            $ yarn add @nestjs/jwt passport-jwt
 
     - Eliminar dependencias
         + Prettier (Formateo de código) [optinal]
@@ -32,96 +37,168 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ nest g res items --no-spec
                 > ? What transport layer do you use? GraphQL (code first)
                 > ? Would you like to generate CRUD entry points? (Y/n) y
+        * Crear un nuevo resource (no test file)
+            $ nest g res users --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) y
+        * Crear un nuevo resource (no test file)
+            $ nest g res auth --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) n
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
-            * createItem (Mutation)
-                > Operation
-                    mutation CreateItem($createItemInput: CreateItemInput!) {
-                        createItem(createItemInput: $createItemInput) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+            * Item
+                - createItem (Mutation)
+                    > Operation
+                        mutation CreateItem($createItemInput: CreateItemInput!) {
+                            createItem(createItemInput: $createItemInput) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                > Variables
-                    {
-                        "createItemInput": {
-                            "name": "Pañales",
-                            "quantity": 1
+                    > Variables
+                        {
+                            "createItemInput": {
+                                "name": "Pañales",
+                                "quantity": 1
+                            }
                         }
-                    }
 
-                    {
-                        "createItemInput": {
-                            "name": "Uvas",
-                            "quantity": 2,
-                            "quentityUnits": "lb"
+                        {
+                            "createItemInput": {
+                                "name": "Uvas",
+                                "quantity": 2,
+                                "quentityUnits": "lb"
+                            }
                         }
-                    }
-                Click 'CreateItem'
-            * items (Query)
-                > Operation
-                    query Items {
-                        items {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    Click 'CreateItem'
+                - items (Query)
+                    > Operation
+                        query Items {
+                            items {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                Click 'Items'
-            * item (Query)
-                 > Operation
-                    query Item($itemId: ID!) {
-                        item(id: $itemId) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    Click 'Items'
+                - item (Query)
+                    > Operation
+                        query Item($itemId: ID!) {
+                            item(id: $itemId) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                > Variables
-                    {
-                        "itemId": "{{ITEM_ID}}"
-                    }
-                Click 'Item'
-            * updateItem (Mutation)
-                > Operation
-                    mutation UpdateItem($updateItemInput: UpdateItemInput!) {
-                        updateItem(updateItemInput: $updateItemInput) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    > Variables
+                        {
+                            "itemId": "{{ITEM_ID}}"
                         }
-                    }
-                > Variables
-                    {
-                        "updateItemInput": {
-                            "id": "f76a3ac5-a67c-4639-adb9-8c6363837533",
-                            "name": "Pañales Updated",
-                            // "quantity": 2
+                    Click 'Item'
+                - updateItem (Mutation)
+                    > Operation
+                        mutation UpdateItem($updateItemInput: UpdateItemInput!) {
+                            updateItem(updateItemInput: $updateItemInput) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
                         }
-                    }
-                Click 'UpdateItem'
-            * removeItem (Mutation)
-                > Operation
-                    mutation RemoveItem($removeItemId: ID!) {
-                        removeItem(id: $removeItemId) {
-                            id
-                            name
-                            quantity
-                            quantityUnits
+                    > Variables
+                        {
+                            "updateItemInput": {
+                                "id": "f76a3ac5-a67c-4639-adb9-8c6363837533",
+                                "name": "Pañales Updated",
+                                // "quantity": 2
+                            }
                         }
-                    }
-                > Variables
-                    {
-                        "removeItemId": "{{ITEM_ID}}"
-                    }
-                Click 'RemoveItem'
-
+                    Click 'UpdateItem'
+                - removeItem (Mutation)
+                    > Operation
+                        mutation RemoveItem($removeItemId: ID!) {
+                            removeItem(id: $removeItemId) {
+                                id
+                                name
+                                quantity
+                                quantityUnits
+                            }
+                        }
+                    > Variables
+                        {
+                            "removeItemId": "{{ITEM_ID}}"
+                        }
+                    Click 'RemoveItem'
+            * Auth
+                - signup (Mutation)
+                    > Operation
+                        mutation Signup($signupInput: SignupInput!) {
+                            signup(signupInput: $signupInput) {
+                                token,
+                                user {
+                                id
+                                email,
+                                fullName,
+                                isActive,
+                                roles
+                                }
+                            }
+                        }
+                    > Variables
+                        {
+                            "signupInput": {
+                                "fullName": "Adriano Ayala",
+                                "email": "adriano@mail.com",
+                                "password": "Secret123#"
+                            }
+                        }
+                    Click 'Signup'
+                - login (Mutation)
+                    > Operation
+                        mutation Login($loginInput: LoginInput!) {
+                            login(loginInput: $loginInput) {
+                                token,
+                                user {
+                                id,
+                                fullName,
+                                email,
+                                isActive,
+                                roles
+                                }
+                            }
+                        }
+                    > Variables
+                        {
+                            "loginInput": {
+                                "email": "adriano@mail.com",
+                                "password": "Secret123#"
+                            }
+                        }
+                - revalidate
+                    > Operation
+                        query Revalidate {
+                            revalidate {
+                                token
+                                user {
+                                    id,
+                                    fullName
+                                    isActive
+                                    roles
+                                }
+                            }
+                        }
+                    > Headers
+                        > Click 'Set shared headers'
+                            > Connection settings
+                                > Shared headers
+                                  header key: Authorization       value: Bearer {{USER_TOKEN}}
+                            Click 'Save'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')
