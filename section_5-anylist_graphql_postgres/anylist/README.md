@@ -25,3 +25,17 @@ PostgreSQL es un sistema de gestión de bases de datos relacional (RDBMS) de có
 ## TypeORM
 
 TypeORM es un ORM (Object-Relational Mapping) para TypeScript y JavaScrtip que permite interactuar con bases de datos realacionales utilizando clases y objetos en lugar de escribir consultas SQL manualmente.
+
+## DigitalOcean
+
+DigitalOcean es una empresa de computación en la nube (cloud computing) que ofrece infraestructura y servicios para que desarrolladores y empresas puedan crear, implementar y escalar aplicaciones de forma sencilla. Se caracteriza por su facilidad de uso, precios predecibles y herramientas orientadas a desarrolladores.
+
+Entre sus principales servicos se encutran:
+
+- **Droplets**: servideres virtuales (máquinas virtuales) que funcionan en la nube y pueden configurarse según las necesidades de CPU, memoria y almacenamiento.
+- **Bases de datos administrativas**: servicios de PostgreSQL, MySQL, Redis y MongoDB, donde DigitalOcean se encarga del mantenimiento, las actualizaciones y las copias de seguridad.
+- **Kubernetes adminitrado**: plataforma para desplegar y administrar aplicaciones basadas en contenedores.
+- **Almacenamiento**: ofrece almacenamientode objetos (Spaces) y almacenamiento en bloques (Volumes) para archivos, copias de seguridad y datos de aplicaciones.
+- **Redes**: incluye balanceadores de carga, redes privadas virtuales (VPC), firewalls y administración de DNS.
+- **App Platform**: una plataforma como servicio (PaaS) que permite desplegar aplicaciones directamente desde un repositorio de código, sin necesidad de administrar servidores.
+- **Servicios para desarrolladores e IA**: herramientas para monitoreo, registro de contenedores, mensajería y alojamiento de cargas de trabajo de inteligencia artificial.

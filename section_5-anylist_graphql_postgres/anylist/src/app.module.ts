@@ -62,6 +62,11 @@ import { ListItemModule } from './list-item/list-item.module';
     // TypeORM (Postgres)
     TypeOrmModule.forRoot({
       type: 'postgres',
+      // SSL for DigitalOcean
+      ssl:
+        process.env.NEST_ENV === 'prod'
+          ? { rejectUnauthorized: false, sslmode: 'require' }
+          : (false as any),
       host: process.env.POSTGRES_HOST,
       port: +process.env.POSTGRES_PORT!,
       username: process.env.POSTGRES_USER,
