@@ -55,23 +55,21 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             createItem(createItemInput: $createItemInput) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "createItemInput": {
-                                "name": "Pañales",
-                                "quantity": 1
-                            }
-                        }
-
-                        {
-                            "createItemInput": {
-                                "name": "Uvas",
-                                "quantity": 2,
-                                "quentityUnits": "lb"
+                                "name": "Donas de D&D ",
+                                "quantityUnits": "unit"
                             }
                         }
                     Click 'CreateItem'
@@ -81,10 +79,16 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             items {
                                 id
                                 name
-                                quantity
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     Click 'Items'
                 - item (Query)
                     > Operation
@@ -92,10 +96,16 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             item(id: $itemId) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "itemId": "{{ITEM_ID}}"
@@ -103,20 +113,25 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                     Click 'Item'
                 - updateItem (Mutation)
                     > Operation
-                        mutation UpdateItem($updateItemInput: UpdateItemInput!) {
+                        mutation Mutation($updateItemInput: UpdateItemInput!) {
                             updateItem(updateItemInput: $updateItemInput) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
+                                user {
+                                    id
+                                    fullName
+                                    email
+                                }
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "updateItemInput": {
-                                "id": "f76a3ac5-a67c-4639-adb9-8c6363837533",
-                                "name": "Pañales Updated",
-                                // "quantity": 2
+                                "id": "2cf82556-11de-42ed-83dd-47198eb94334",
+                                "quantityUnits": "porcion"
                             }
                         }
                     Click 'UpdateItem'
@@ -126,10 +141,11 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             removeItem(id: $removeItemId) {
                                 id
                                 name
-                                quantity
                                 quantityUnits
                             }
                         }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
                             "removeItemId": "{{ITEM_ID}}"
@@ -212,6 +228,21 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 lastUpdateBy {
                                     id
                                     fullName
+                                }
+                            }
+                        }
+
+                        query Users {
+                            users {
+                                id
+                                fullName
+                                email
+                                isActive
+                                roles
+                                itemCount # ResolveField con info del padre
+                                items {
+                                    id
+                                    name
                                 }
                             }
                         }
