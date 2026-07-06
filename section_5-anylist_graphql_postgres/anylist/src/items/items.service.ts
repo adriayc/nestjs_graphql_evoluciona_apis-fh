@@ -1,10 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 
 import { CreateItemInput, UpdateItemInput } from './dto/inputs';
 import { Item } from './entities/item.entity';
 import { User } from 'src/users/entities/user.entity';
+import { PaginationArgs } from 'src/common/dto/args/pagination.args';
+import { SearchArgs } from 'src/common/dto/args';
 
 @Injectable()
 export class ItemsService {
@@ -14,21 +16,43 @@ export class ItemsService {
   ) {}
 
   async create(createItemInput: CreateItemInput, user: User): Promise<Item> {
-    console.log(createItemInput);
     const newItem = this.itemsRepository.create({ ...createItemInput, user }); // Crear el item
     return await this.itemsRepository.save(newItem); // Guardar en la DB y retorna el item
   }
 
-  async findAll(user: User): Promise<Item[]> {
-    // TODO: filtrar, paginar, por usuario...
-    // Filter by user
-    return await this.itemsRepository.find({
-      where: {
-        user: {
-          id: user.id,
-        },
-      },
-    });
+  async findAll(
+    user: User,
+    paginationArgs: PaginationArgs,
+    searchArgs: SearchArgs,
+  ): Promise<Item[]> {
+    const { limit, offset } = paginationArgs;
+    const { search } = searchArgs;
+
+    // Filtrar, paginar, por usuario...
+    // return await this.itemsRepository.find({
+    //   where: {
+    //     user: {
+    //       id: user.id, // Filter by user
+    //     },
+    //     name: ILike(`%${search}%`), // Filter by name (ILike - case-insensitive)
+    //   },
+    //   take: limit,
+    //   skip: offset,
+    // });
+
+    const queryBuilder = this.itemsRepository
+      .createQueryBuilder()
+      .where('"userId" = :userId', { userId: user.id })
+      .limit(limit)
+      .offset(offset);
+
+    if (search) {
+      queryBuilder.andWhere('LOWER(name) like :name', {
+        name: `%${search.toLowerCase()}%`,
+      });
+    }
+
+    return await queryBuilder.getMany();
   }
 
   async findOne(id: string, user: User) {

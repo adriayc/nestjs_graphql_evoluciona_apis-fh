@@ -56,6 +56,6 @@ export class User {
 
   // Relacion (1:n) con Item
   @OneToMany(() => Item, (item) => item.user, { lazy: true }) // lazy - agregar los items (relaciones)
-  @Field(() => [Item])
+  // @Field(() => [Item]) // Deshabilitar el campo Item de GraphQL
   items!: Item[];
 }

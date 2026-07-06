@@ -49,6 +49,8 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             $ nest g res seed --no-spec
                 > ? What transport layer do you use? GraphQL (code first)
                 > ? Would you like to generate CRUD entry points? (Y/n) n
+        * Crear un nuevo module
+            $ nest g mo common
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
@@ -93,6 +95,25 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         }
                     > Headers
                         [x] Authorization   Bearer {{USER_TOKEN}}
+                    Click 'Items'
+
+                    Pagination and Filter
+                    > Operation
+                        query Items($limit: Int, $offset: Int) {
+                            items(limit: $limit, offset: $offset) {
+                                name
+                                id
+                                quantityUnits
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                    {
+                        "limit": 5,     # Default 10
+                        "offset": 0     # Default 0
+                        "search": "rice"
+                    }
                     Click 'Items'
                 - item (Query)
                     > Operation
@@ -261,6 +282,33 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             "roles": ["admin","user"]
                         }
                     CLick 'Users'
+
+                    Pagination and Filter
+                    > Operation
+                        query Users($limit: Int, $offset: Int, $itemsLimit2: Int, $itemsOffset2: Int, $search: String) {
+                            users(limit: $limit, offset: $offset) {
+                                id
+                                fullName
+                                email
+                                isActive
+                                roles
+                                items(limit: $itemsLimit2, offset: $itemsOffset2, search: $search) {
+                                    id
+                                    name
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "limit": 2,
+                            "offset": 0,
+                            "itemsLimit2": 5,
+                            "itemsOffset2": 0,
+                            "search": "rice"
+                        }
+                    CLick 'Users'
                 - user (Query)
                     > Operation
                         query User($userId: ID!) {
@@ -281,6 +329,30 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         {
                             "userId": "27c495bf-8f8b-4e89-bbde-294af8347983"
                         }
+                    Click 'User'
+
+                    Pagination and Search
+                    > Operation
+                        query Query($userId: ID!, $limit: Int, $offset: Int, $search: String) {
+                            user(id: $userId) {
+                                id
+                                fullName
+                                email
+                                items(limit: $limit, offset: $offset, search: $search) {
+                                    id
+                                    name
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                    {
+                        "userId": "{{USER_ID}",
+                        "limit": 5,
+                        "offset": 0,
+                        "search": "rice"
+                    }
                     Click 'User'
                 - userBlock (Mutation)
                     > Operation
