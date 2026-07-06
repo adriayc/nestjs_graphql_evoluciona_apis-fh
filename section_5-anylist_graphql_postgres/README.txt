@@ -199,6 +199,103 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 > Shared headers
                                   header key: Authorization       value: Bearer {{USER_TOKEN}}
                             Click 'Save'
+            * User
+                - users (Query)
+                    > Operation
+                        query Users($roles: [String!]) {
+                            users(roles: $roles) {
+                                id
+                                fullName
+                                email
+                                isActive
+                                roles
+                                lastUpdateBy {
+                                    id
+                                    fullName
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "roles": "admin"
+                        }
+
+                        {
+                            "roles": ["admin","user"]
+                        }
+                    CLick 'Users'
+                - user (Query)
+                    > Operation
+                        query User($userId: ID!) {
+                            user(id: $userId) {
+                                id
+                                fullName
+                                email
+                                isActive
+                                lastUpdateBy {
+                                    id
+                                    fullName
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "userId": "27c495bf-8f8b-4e89-bbde-294af8347983"
+                        }
+                    Click 'User'
+                - userBlock (Mutation)
+                    > Operation
+                        mutation BlockUser($blockUserId: ID!) {
+                            blockUser(id: $blockUserId) {
+                                id
+                                fullName
+                                email
+                                isActive
+                                lastUpdateBy {
+                                    id
+                                    fullName
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "blockUserId": "{{USER_ID}"
+                        }
+                    Click 'BlockUser'
+                - updateUser
+                    > Operation
+                        mutation UpdateUser($updateUserInput: UpdateUserInput!) {
+                            updateUser(updateUserInput: $updateUserInput) {
+                                id
+                                fullName
+                                email
+                                roles
+                                isActive
+                                lastUpdateBy {
+                                fullName, email
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "updateUserInput": {
+                                "id": "8e73f75f-3e23-47ea-9794-52466e39913e",
+                                // "fullName": "Adriano Ayala Updated",
+                                // "email": "adriano@mail.com",
+                                "isActive": true,
+                                // "roles": "admin", // overwrites the roles
+                                "roles": ["admin", "superUser"]
+                            }
+                        }
+                    Click "UpdateUser"
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')

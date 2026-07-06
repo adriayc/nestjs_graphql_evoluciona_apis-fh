@@ -4,7 +4,6 @@ import {
   InternalServerErrorException,
   Logger,
   NotFoundException,
-  NotImplementedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,6 +11,8 @@ import bcrypt from 'bcrypt';
 
 import { User } from './entities/user.entity';
 import { SignupInput } from 'src/auth/dto/inputs/signup.input';
+import { ValidRoles } from 'src/auth/enums/valid-roles.enum';
+import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UsersService {
@@ -35,8 +36,20 @@ export class UsersService {
     }
   }
 
-  findAll(): Promise<User[]> {
-    throw new NotImplementedException('findAll method not implemented');
+  findAll(roles: ValidRoles[]): Promise<User[]> {
+    if (roles.length === 0)
+      return this.usersRepository.find(/*{
+        relations: {
+          lastUpdateBy: true, // Show relations
+        },
+      }*/);
+
+    // Usamos queryBuilder si existe roles (pasado como args)
+    return this.usersRepository
+      .createQueryBuilder()
+      .andWhere('ARRAY[roles] && ARRAY[:...roles]')
+      .setParameter('roles', roles)
+      .getMany();
   }
 
   async findOneByEmail(email: string): Promise<User> {
@@ -59,8 +72,31 @@ export class UsersService {
     }
   }
 
-  block(id: string): Promise<User> {
-    throw new NotImplementedException('block method not implemented');
+  async update(
+    id: string,
+    updateUserInput: UpdateUserInput,
+    adminUser: User,
+  ): Promise<User> {
+    try {
+      const user = (await this.usersRepository.preload({
+        ...updateUserInput,
+        id,
+      })) as User;
+      user.lastUpdateBy = adminUser;
+      // user.roles = u;
+
+      return await this.usersRepository.save(user);
+    } catch (error) {
+      this.handlerDBError(error);
+    }
+  }
+
+  async block(id: string, adminUser: User): Promise<User> {
+    const userToBlock = await this.findOneById(id);
+    userToBlock.isActive = false;
+    userToBlock.lastUpdateBy = adminUser; // Add admin user
+
+    return await this.usersRepository.save(userToBlock);
   }
 
   private handlerDBError(error: any): never {
