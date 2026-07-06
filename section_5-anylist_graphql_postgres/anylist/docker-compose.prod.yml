@@ -19,7 +19,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nest-graphql-app
+    # image: nest-graphql-app
+    iamge: adriayc/nest-graphql-app
     container_name: AnyListApp
     restart: always # Reiniciar el contenedor si se detiene
     ports:

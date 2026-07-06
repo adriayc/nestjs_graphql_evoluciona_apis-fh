@@ -695,3 +695,24 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
             * Ejectutar la imagen
                 $ docker run -e PORT=4000 anylist-nest-graphql-app              # Agregar manualmente cada vars
                 $ docker run --env-file=.env.prod -p 80:4000 anylist-nest-graphql-app      # Agregar todos los env del archivo .env.prod
+
+        + Hub
+            * Sign up/Sign in
+            * NOTA: Comment out the 'db' service in `docker-compose.prod.yml` (We use de DigitalOcean database)
+            * Create a repository (My Hub > 'Create a repository')
+                > Create repository
+                    > Respository Name: nest-graphql-app
+                    > Short description: NestJS, GraphQL and PostgreSQL
+                    > Private
+                    Click 'Create'
+            * Commands
+                - Logout
+                    $ docker logout
+                - Login
+                    $ docker login
+                - Change name
+                    $ docker tag nest-graphql-app adriayc/nest-graphql-app:1.0.0
+                - Upload image to Hub
+                    $ docker push adriayc/nest-graphql-app:1.0.0
+                - Run the Hub image
+                    $ docker run -p 4000:4000 --env-file=.env.prod adriayc/nest-graphql-app:1.0.0
