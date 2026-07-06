@@ -51,6 +51,14 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                 > ? Would you like to generate CRUD entry points? (Y/n) n
         * Crear un nuevo module
             $ nest g mo common
+        * Crear un nuevo resource (no test file)
+            $ nest g res lists --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) y
+        * Crear un nuevo resource (no test file)
+            $ nest g res listItem --no-spec
+                > ? What transport layer do you use? GraphQL (code first)
+                > ? Would you like to generate CRUD entry points? (Y/n) y
 
     - Apollo Sandbox (Studio)
         + Request in GraphQL (Browser URL (SANDBOX): http://localhost:3000/graphql)
@@ -104,6 +112,16 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                                 name
                                 id
                                 quantityUnits
+                                itemCount
+                                items {
+                                    id
+                                    quantity
+                                    completed
+                                    item {
+                                        id
+                                        name
+                                    }
+                                }
                             }
                         }
                     > Headers
@@ -285,14 +303,18 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
 
                     Pagination and Filter
                     > Operation
-                        query Users($limit: Int, $offset: Int, $itemsLimit2: Int, $itemsOffset2: Int, $search: String) {
-                            users(limit: $limit, offset: $offset) {
+                        query Users($offset: Int, $limit: Int, $itemsLimit2: Int, $itemsOffset2: Int, $listsLimit2: Int, $listsOffset2: Int, $search: String, $listsSearch2: String) {
+                            users(offset: $offset, limit: $limit) {
                                 id
                                 fullName
                                 email
-                                isActive
-                                roles
+                                itemCount
                                 items(limit: $itemsLimit2, offset: $itemsOffset2, search: $search) {
+                                    id
+                                    name
+                                }
+                                listCount
+                                lists(limit: $listsLimit2, offset: $listsOffset2, search: $listsSearch2) {
                                     id
                                     name
                                 }
@@ -302,11 +324,14 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                         [x] Authorization   Bearer {{USER_TOKEN}}
                     > Variables
                         {
-                            "limit": 2,
                             "offset": 0,
-                            "itemsLimit2": 5,
+                            "limit": 10,
+                            "itemsLimit2": 3,
                             "itemsOffset2": 0,
-                            "search": "rice"
+                            // "search": "rice",
+                            "listsLimit2": 3,
+                            "listsOffset2": 0,
+                            // "listsSearch2": "list #1",
                         }
                     CLick 'Users'
                 - user (Query)
@@ -410,6 +435,163 @@ ANYLIST (NestJS + GraphQL & PostgreSQL with TypeORM)
                             executeSeed
                         }
                     Click 'ExecuteSeed'
+            * List
+                - createList (Mutation)
+                    > Operation:
+                        mutation Mutation($createListInput: CreateListInput!) {
+                            createList(createListInput: $createListInput) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "createListInput": {
+                                "name": "List #12"
+                            }
+                        }
+                    Click 'Mutation'
+                - lists (query)
+                    > Operation
+                        query Query($limit: Int, $offset: Int, $search: String) {
+                            lists(limit: $limit, offset: $offset, search: $search) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "limit": 10,
+                            "offset": 0,
+                            "search": "list #1"
+                        }
+                    Click 'Query'
+                - list (query)
+                    > Operation
+                        query List($listId: ID!) {
+                            list(id: $listId) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "listId": "3eb51617-e81b-4f58-9cee-be914f75391f"
+                        }
+                    Click 'Query'
+                - updateList (Mutation)
+                    > Operation:
+                        mutation Mutation($updateListInput: UpdateListInput!) {
+                            updateList(updateListInput: $updateListInput) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "updateListInput": {
+                                "id": "{{LIST_ID}}",
+                                "name": "First List Updated"
+                            }
+                        }
+                    Click 'Mutation'
+                - deleteList (Mutation)
+                    > Operation
+                        mutation Mutation($removeListId: ID!) {
+                            removeList(id: $removeListId) {
+                                id
+                                name
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "removeListId": "{{LIST_ID}}"
+                        }
+                    Click 'Mutation'
+            * ListItem
+                - createListItem (Mutation)
+                    > Operation
+                        mutation Mutation($createListItemInput: CreateListItemInput!) {
+                            createListItem(createListItemInput: $createListItemInput) {
+                                id
+                                quantity
+                                completed
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "createListItemInput": {
+                                "itemId": "{{ITEM_ID}}",
+                                "listId": "{{LIST_ID}",
+                                "quantity": 10
+                            }
+                        }
+                    Click 'Mutation'
+                - listItem (Query)
+                    > Operation
+                        query Query($listItemId: ID!) {
+                            listItem(id: $listItemId) {
+                                id
+                                quantity
+                                completed
+                                list {
+                                    id
+                                    name
+                                    itemCount
+                                }
+                                item {
+                                    id
+                                    name
+                                    quantityUnits
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "listItemId": "{{LISTITEM_ID}}"
+                        }
+                    Click 'Query'
+                - updateListItem (Mutation)
+                    > Operation
+                        mutation Mutation($updateListItemInput: UpdateListItemInput!) {
+                            updateListItem(updateListItemInput: $updateListItemInput) {
+                                id
+                                quantity
+                                completed
+                                item {
+                                    name
+                                }
+                                list {
+                                    name
+                                }
+                            }
+                        }
+                    > Headers
+                        [x] Authorization   Bearer {{USER_TOKEN}}
+                    > Variables
+                        {
+                            "updateListItemInput": {
+                                "id": "{{LISTITEM_ID}",
+                                "quantity": 5,
+                                "completed": true,
+                                "listId": "{{ANOTHER_LIST_ID}"
+                            }
+                        }
+                    Click 'Mutation'
 
     - Table Plus
         + Create new connection (Click '+' | 'New Connection')

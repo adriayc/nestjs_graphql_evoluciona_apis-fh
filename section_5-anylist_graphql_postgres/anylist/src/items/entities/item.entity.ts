@@ -9,10 +9,12 @@ import {
   Entity,
   Index,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import { User } from 'src/users/entities/user.entity';
+import { ListItem } from 'src/list-item/entities/list-item.entity';
 
 @Entity({ name: 'items' }) // Entity
 @ObjectType() // GraphQL
@@ -40,4 +42,9 @@ export class Item {
   @Index('userId-index') // Agrear un index
   @Field(() => User)
   user!: User;
+
+  // Relación (1:n) con ListItem
+  @OneToMany(() => ListItem, (listItem) => listItem.item, { lazy: true })
+  @Field(() => [ListItem])
+  listItem!: ListItem[];
 }
